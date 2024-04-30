@@ -217,6 +217,81 @@ def ai_tools_page():
 
     ---""")
 
+# Function for the IT Jobs page
+def it_jobs_page():
+    st.title("Vagas de Emprego em TI")
+
+    st.markdown("""
+    ## Vagas de Emprego em TI
+
+    Aqui estão algumas das vagas de emprego disponíveis na área de Tecnologia da Informação:
+
+    ### Desenvolvedor de Software
+    - Descrição: Desenvolver e manter software para atender às necessidades da empresa.
+    - Requisitos: Conhecimento em linguagens de programação como Python, Java, ou JavaScript.
+    - [Vagas no Linkedin](https://www.linkedin.com/jobs/desenvolvedor-de-software)
+    - [Vagas no Infojobs](https://www.infojobs.com.br/vagas-de-emprego-desenvolvedor%20de%20software.aspx)
+    - [Vagas no Glassdoor](https://www.glassdoor.com.br/Vagas/desenvolvedor-de-software-vagas-SRCH_KO0,24.htm)
+
+    ### Engenheiro de Dados
+    - Descrição: Projetar e implementar sistemas de armazenamento e recuperação de dados.
+    - Requisitos: Experiência em bancos de dados SQL e NoSQL, conhecimento em ferramentas de big data como Hadoop.
+    - [Vagas no Linkedin](https://www.linkedin.com/jobs/engenheiro-de-dados)
+    - [Vagas no Infojobs](https://www.infojobs.com.br/vagas-de-emprego-engenheiro%20de%20dados.aspx)
+    - [Vagas no Glassdoor](https://www.glassdoor.com.br/Vagas/engenheiro-de-dados-vagas-SRCH_KO0,19.htm)
+
+    ### Cientista de Dados
+    - Descrição: Analisar grandes conjuntos de dados para extrair insights e tomar decisões baseadas em dados.
+    - Requisitos: Habilidades em estatística, machine learning, e programação.
+    - [Vagas no Linkedin](https://www.linkedin.com/jobs/cientista-de-dados)
+    - [Vagas no Infojobs](https://www.infojobs.com.br/vagas-de-emprego-cientista%20de%20dados.aspx)
+    - [Vagas no Glassdoor](https://www.glassdoor.com.br/Vagas/cientista-de-dados-vagas-SRCH_KO0,17.htm)
+
+    ### Analista de Segurança da Informação
+    - Descrição: Proteger os sistemas de informação da empresa contra ameaças internas e externas.
+    - Requisitos: Conhecimento em segurança da informação, certificações como CISSP ou CompTIA Security+ são desejáveis.
+    - [Vagas no Linkedin](https://www.linkedin.com/jobs/analista-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o)
+    - [Vagas no Infojobs](https://www.infojobs.com.br/vagas-de-emprego-analista%20de%20seguran%C3%A7a%20da%20informa%C3%A7%C3%A3o.aspx)
+    - [Vagas no Glassdoor](https://www.glassdoor.com.br/Vagas/analista-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-vagas-SRCH_KO0,32.htm)
+
+    ### Administrador de Redes
+    - Descrição: Gerenciar e manter a infraestrutura de rede da empresa.
+    - Requisitos: Experiência em administração de redes, conhecimento em protocolos de rede como TCP/IP.
+    - [Vagas no Linkedin](https://www.linkedin.com/jobs/administrador-de-redes)
+    - [Vagas no Infojobs](https://www.infojobs.com.br/vagas-de-emprego-administrador%20de%20redes.aspx)
+    - [Vagas no Glassdoor](https://www.glassdoor.com.br/Vagas/administrador-de-redes-vagas-SRCH_KO0,22.htm)
+
+    ## Roadmap para Cargos de TI
+
+    Aqui está um roadmap geral para os cargos de TI, incluindo IA, Júnior, Pleno e Sênior:
+
+    ### Cientista de Dados
+    - Júnior: Conhecimentos básicos em estatística e linguagens de programação.
+    - Pleno: Experiência em análise de dados e machine learning.
+    - Sênior: Especialização em áreas específicas de ciência de dados e liderança de projetos.
+
+    ### Desenvolvedor de Software
+    - Júnior: Conhecimentos básicos em uma linguagem de programação.
+    - Pleno: Experiência no desenvolvimento de aplicativos web ou móveis.
+    - Sênior: Especialização em arquitetura de software e liderança técnica.
+
+    ### Engenheiro de Dados
+    - Júnior: Experiência em bancos de dados relacionais e linguagens de consulta.
+    - Pleno: Conhecimento em ferramentas de big data e processamento distribuído.
+    - Sênior: Especialização em design e otimização de pipelines de dados.
+
+    ### Analista de Segurança da Informação
+    - Júnior: Conhecimento básico em segurança de redes e sistemas.
+    - Pleno: Experiência em análise de vulnerabilidades e resposta a incidentes.
+    - Sênior: Especialização em arquitetura de segurança e gestão de riscos.
+
+    ### Administrador de Redes
+    - Júnior: Conhecimentos básicos em configuração de redes e dispositivos.
+    - Pleno: Experiência em administração de servidores e gerenciamento de redes.
+    - Sênior: Especialização em design e implementação de infraestrutura de rede.
+
+    """)
+
 # Function for the initial page
 def initial_page():
     st.title("Bem-vindo ao Projeto LTD!")
@@ -412,7 +487,7 @@ def main():
     - Adicionar descrição e foto na barra lateral.
     - Incluir opções de navegação para outras páginas.
     """)
-    selected_page = st.sidebar.radio("Selecione uma página", [("Início 🏠", "Início"), ("ChatBot 💬", "ChatBot"), ("Whatsapp 💬", "Whatsapp"), ("Gerador de Currículo 📄", "Gerador de Currículo"), ("Sobre ℹ️", "Sobre"), ("Ferramentas de IA 🛠️", "Ferramentas de IA"), ("Dashboard 📱", "Dashboard")], index=0)
+    selected_page = st.sidebar.radio("Selecione uma página", [("Início 🏠", "Início"), ("Jobs 💼", "Jobs"), ("ChatBot 💬", "ChatBot"), ("Whatsapp 💬", "Whatsapp"), ("Gerador de Currículo 📄", "Gerador de Currículo"), ("Sobre ℹ️", "Sobre"), ("Ferramentas de IA 🛠️", "Ferramentas de IA"), ("Dashboard 📱", "Dashboard")], index=0)
     if selected_page[1] == "Início":
         initial_page()
     elif selected_page[1] == "ChatBot":
@@ -423,6 +498,8 @@ def main():
         about_page()
     elif selected_page[1] == "Dashboard":
         dash()
+    elif selected_page[1] == "Jobs":
+        it_jobs_page()
     elif selected_page[1] == "Whatsapp":
         whatsapp_ai_bot_help_page()
     else:
