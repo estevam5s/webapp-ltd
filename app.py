@@ -532,6 +532,33 @@ def study_material_page():
 
     """)
 
+# Function for the Technology News page
+def technology_news_page():
+    st.title("Notícias sobre Tecnologia")
+
+    st.markdown("""
+    ## Notícias sobre Tecnologia
+
+    Aqui estão algumas das últimas notícias sobre tecnologia:
+
+    ### 1. Novo iPhone 14 Anunciado pela Apple
+    A Apple anunciou o lançamento do novo iPhone 14, que promete recursos avançados e melhorias significativas em relação aos modelos anteriores. O iPhone 14 apresenta uma nova tela OLED de alta resolução e uma câmera aprimorada com capacidades de fotografia computacional.
+
+    ### 2. Google Revela Avanços em IA
+    O Google revelou avanços impressionantes em inteligência artificial, incluindo um novo algoritmo de aprendizado de máquina capaz de superar desafios complexos de jogos de tabuleiro. Os pesquisadores do Google afirmam que o novo algoritmo demonstra uma capacidade sem precedentes de aprendizado e adaptação.
+
+    ### 3. Amazon Lança Novo Dispositivo de Casa Inteligente
+    A Amazon lançou um novo dispositivo de casa inteligente chamado Echo Hub, projetado para ser o centro de controle para dispositivos domésticos conectados. O Echo Hub oferece recursos avançados de voz e integração perfeita com outros dispositivos compatíveis com Alexa.
+
+    ### 4. Microsoft Anuncia Parceria com Empresa de Robótica
+    A Microsoft anunciou uma parceria estratégica com uma empresa líder em robótica para desenvolver soluções inovadoras para automação industrial e logística. A parceria visa combinar a expertise em software da Microsoft com a experiência em hardware da empresa de robótica para criar soluções de ponta.
+
+    ### 5. Facebook Lança Novo Recurso de Realidade Aumentada
+    O Facebook lançou um novo recurso de realidade aumentada chamado AR Studio, que permite aos usuários criar e compartilhar experiências imersivas de RA diretamente do aplicativo. O AR Studio oferece uma ampla gama de ferramentas e recursos para criar experiências interativas e envolventes.
+
+    """)
+
+
 # Main function
 def main():
     st.sidebar.image("estacio.jpg", use_column_width=True)
@@ -542,7 +569,7 @@ def main():
     - Adicionar descrição e foto na barra lateral.
     - Incluir opções de navegação para outras páginas.
     """)
-    selected_page = st.sidebar.radio("Selecione uma página", [("Início 🏠", "Início"), ("Jobs 💼", "Jobs"), ("Material Estudos 📚", "Material Estudos"), ("ChatBot 💬", "ChatBot"), ("Whatsapp 💬", "Whatsapp"), ("Gerador de Currículo 📄", "Gerador de Currículo"), ("Sobre ℹ️", "Sobre"), ("Ferramentas de IA 🛠️", "Ferramentas de IA"), ("Dashboard 📱", "Dashboard")], index=0)
+    selected_page = st.sidebar.radio("Selecione uma página", [("Início 🏠", "Início"), ("Jobs 💼", "Jobs"), ("Notícias 💻", "Notícias"), ("Material Estudos 📚", "Material Estudos"), ("ChatBot 💬", "ChatBot"), ("Whatsapp 💬", "Whatsapp"), ("Gerador de Currículo 📄", "Gerador de Currículo"), ("Sobre ℹ️", "Sobre"), ("Ferramentas de IA 🛠️", "Ferramentas de IA"), ("Dashboard 📱", "Dashboard")], index=0)
     if selected_page[1] == "Início":
         initial_page()
     elif selected_page[1] == "ChatBot":
@@ -557,6 +584,8 @@ def main():
         it_jobs_page()
     elif selected_page[1] == "Material Estudos":
         study_material_page()
+    elif selected_page[1] == "Notícias":
+        technology_news_page()
     elif selected_page[1] == "Whatsapp":
         whatsapp_ai_bot_help_page()
     else:
