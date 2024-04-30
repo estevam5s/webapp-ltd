@@ -477,6 +477,61 @@ def dash():
 
 # ----------------------------------------------------------------------------------------------------------------------
 
+# Function for the Study Material page
+def study_material_page():
+    st.title("Material de Estudos em TI")
+
+    st.markdown("""
+
+    Aqui está uma lista de recursos de estudo na área de Tecnologia da Informação, organizados por nível:
+
+    ## Iniciante
+
+    ### Vídeo Aulas
+    - [Curso de Desenvolvimento Web - TreinaWeb](https://www.treinaweb.com.br/curso/desenvolvimento-web)
+    - [Curso de Python - Udemy](https://www.udemy.com/course/python-para-todos/)
+    - [Curso de HTML5 e CSS3 - Origamid](https://www.origamid.com/curso/html5-css3)
+    
+    ### Livros
+    - "Python Fluente" - Luciano Ramalho
+    - "HTML5 e CSS3: Domine a web do futuro" - Ricardo R. Lecheta
+
+    ### Cursos Online
+    - [Python Fundamentos - Udemy](https://www.udemy.com/course/python-fundamentos/)
+    - [HTML5 e CSS3 - Udacity](https://br.udacity.com/course/intro-to-html-and-css--ud001)
+
+    ## Intermediário
+
+    ### Vídeo Aulas
+    - [Curso de React - Rocketseat](https://rocketseat.com.br/starter)
+    - [Curso de JavaScript - Danki Code](https://www.dankicode.com/curso-completo-de-javascript)
+    - [Curso de Data Science - Data Science Academy](https://www.datascienceacademy.com.br/course?courseid=python-fundamentos)
+
+    ### Livros
+    - "Clean Code: A Handbook of Agile Software Craftsmanship" - Robert C. Martin
+    - "JavaScript: The Good Parts" - Douglas Crockford
+
+    ### Cursos Online
+    - [React Native - Udemy](https://www.udemy.com/course/react-native-app/)
+    - [Data Science e Machine Learning - Coursera](https://www.coursera.org/learn/machine-learning)
+
+    ## Avançado
+
+    ### Vídeo Aulas
+    - [Curso de Inteligência Artificial - Udacity](https://br.udacity.com/course/intro-to-artificial-intelligence--cs271)
+    - [Curso de Docker - Alura](https://www.alura.com.br/curso-online-docker-e-docker-compose)
+    - [Curso de Deep Learning - Data Science Academy](https://www.datascienceacademy.com.br/course?courseid=deep-learning-ii)
+
+    ### Livros
+    - "Deep Learning" - Ian Goodfellow, Yoshua Bengio, Aaron Courville
+    - "Docker in Action" - Jeff Nickoloff
+
+    ### Cursos Online
+    - [Machine Learning - Coursera](https://www.coursera.org/learn/machine-learning)
+    - [Deep Learning Specialization - Coursera](https://www.coursera.org/specializations/deep-learning)
+
+    """)
+
 # Main function
 def main():
     st.sidebar.image("estacio.jpg", use_column_width=True)
@@ -487,7 +542,7 @@ def main():
     - Adicionar descrição e foto na barra lateral.
     - Incluir opções de navegação para outras páginas.
     """)
-    selected_page = st.sidebar.radio("Selecione uma página", [("Início 🏠", "Início"), ("Jobs 💼", "Jobs"), ("ChatBot 💬", "ChatBot"), ("Whatsapp 💬", "Whatsapp"), ("Gerador de Currículo 📄", "Gerador de Currículo"), ("Sobre ℹ️", "Sobre"), ("Ferramentas de IA 🛠️", "Ferramentas de IA"), ("Dashboard 📱", "Dashboard")], index=0)
+    selected_page = st.sidebar.radio("Selecione uma página", [("Início 🏠", "Início"), ("Jobs 💼", "Jobs"), ("Material Estudos 📚", "Material Estudos"), ("ChatBot 💬", "ChatBot"), ("Whatsapp 💬", "Whatsapp"), ("Gerador de Currículo 📄", "Gerador de Currículo"), ("Sobre ℹ️", "Sobre"), ("Ferramentas de IA 🛠️", "Ferramentas de IA"), ("Dashboard 📱", "Dashboard")], index=0)
     if selected_page[1] == "Início":
         initial_page()
     elif selected_page[1] == "ChatBot":
@@ -500,6 +555,8 @@ def main():
         dash()
     elif selected_page[1] == "Jobs":
         it_jobs_page()
+    elif selected_page[1] == "Material Estudos":
+        study_material_page()
     elif selected_page[1] == "Whatsapp":
         whatsapp_ai_bot_help_page()
     else:
