@@ -220,7 +220,26 @@ def ai_tools_page():
 # Function for the initial page
 def initial_page():
     st.title("Bem-vindo ao Projeto LTD!")
-    st.write("Este é um projeto que combina um chatbot com um gerador de currículo em PDF. Utilize o menu à esquerda para navegar pelas diferentes funcionalidades do projeto.")
+    
+    # Adicionando informações sobre o Projeto LTD
+    st.markdown("""
+    ## Sobre o Projeto LTD
+
+    O Projeto LTD é uma iniciativa da Estácio que visa combinar tecnologia e educação para fornecer soluções inovadoras aos alunos e à comunidade em geral. O projeto inclui um chatbot com inteligência artificial para assistência personalizada e um gerador de currículo em PDF para ajudar os usuários a criar currículos profissionais de forma rápida e fácil.
+
+    ## Sobre a Estácio
+
+    A Estácio é uma instituição de ensino superior comprometida em oferecer educação de qualidade e acessível para todos. Com uma ampla gama de cursos e programas, a Estácio prepara os alunos para enfrentar os desafios do mercado de trabalho e alcançar seus objetivos profissionais.
+
+    ## LTDs do Passado
+
+    Aqui estão algumas imagens de LTDs do passado:
+
+    ![LTD 1](https://example.com/ltd1.jpg)
+    ![LTD 2](https://example.com/ltd2.jpg)
+    ![LTD 3](https://example.com/ltd3.jpg)
+
+    """)
 
 # Function for the WhatsApp AI Bot Help page
 def whatsapp_ai_bot_help_page():
