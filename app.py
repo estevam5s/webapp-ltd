@@ -48,10 +48,11 @@ def init_resume_session_state():
         st.session_state['skills'] = ""
 
 # Initialize the ChatOpenAI model
-def init_chatbot_model():
+def init_chatbot_model(api_key):
     return ChatOpenAI(
         temperature=0.5,
-        model_name="gpt-3.5-turbo"
+        model_name="gpt-3.5-turbo",
+        api_key="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"
     )
 
 # Build a list of messages including system, human and AI messages for chatbot
@@ -75,34 +76,67 @@ def generate_response(chat):
     ai_response = chat(zipped_messages)
     return ai_response.content
 
+# Initialize the ChatOpenAI model
+def init_chat():
+    return ChatOpenAI(
+        temperature=0.5,
+        model_name="gpt-3.5-turbo"
+    )
+
+# Initialize session state variables
+def init_session_state():
+    if 'generated' not in st.session_state:
+        st.session_state['generated'] = []  # Store AI generated responses
+
+    if 'past' not in st.session_state:
+        st.session_state['past'] = []  # Store past user inputs
+
+    if 'entered_prompt' not in st.session_state:
+        st.session_state['entered_prompt'] = ""  # Store the latest user input
+
+
+# Function for the chatbot page
 # Function for the chatbot page
 def chatbot_page():
     st.title("ChatBot LTD")
 
-    init_chatbot_session_state()
+    # Initialize session state variables
+    init_session_state()
 
-    chat = init_chatbot_model()
+    # Initialize the ChatOpenAI model
+    chat = init_chat()
 
+    # Create a text input for user
     user_input = st.text_input('YOU: ', key='prompt_input')
 
     if st.button("Enviar"):
         st.session_state.entered_prompt = user_input
 
     if st.session_state.entered_prompt != "":
+        # Get user query
         user_query = st.session_state.entered_prompt
+
+        # Append user query to past queries
         st.session_state.past.append(user_query)
+
+        # Generate response
         output = generate_response(chat)
+
+        # Append AI response to generated responses
         st.session_state.generated.append(output)
 
+    # Display the chat history
     if st.session_state['generated']:
         for i in range(len(st.session_state['generated'])-1, -1, -1):
+            # Display AI response
             message(st.session_state["generated"][i], key=str(i))
+            # Display user message
             message(st.session_state['past'][i],
                     is_user=True, key=str(i) + '_user')
 
     st.markdown("""
     ---
-    Feito por [Estevam Souza](https://github.com/estevam5s)""")
+    Feito com 🤖 por [Estevam Souza](https://github.com/estevam5s)""")
 
 # Function for the resume generator page
 def generate_resume_page():
@@ -187,6 +221,44 @@ def ai_tools_page():
 def initial_page():
     st.title("Bem-vindo ao Projeto LTD!")
     st.write("Este é um projeto que combina um chatbot com um gerador de currículo em PDF. Utilize o menu à esquerda para navegar pelas diferentes funcionalidades do projeto.")
+
+# Function for the WhatsApp AI Bot Help page
+def whatsapp_ai_bot_help_page():
+    st.title("Ajuda do WhatsApp AI Bot")
+
+    st.markdown("""
+    # Ajuda do WhatsApp AI Bot
+
+    Você pode usar o bot de WhatsApp AI para obter respostas para suas perguntas. Aqui está como:
+
+    1. Adicione o número de WhatsApp do bot à sua lista de contatos.
+    2. Envie uma mensagem para o bot com sua pergunta.
+    3. O bot responderá automaticamente com uma resposta baseada na inteligência artificial.
+
+    Certifique-se de incluir informações claras e concisas em suas mensagens para obter as melhores respostas do bot.
+
+    ## Links Úteis
+    - [Adicionar Bot do WhatsApp](https://api.whatsapp.com/send/?phone=seunumerodewhatsapp)
+    - [FAQ do Projeto LTD da Estácio](#faq)
+
+    ---""")
+
+    st.markdown("""
+    ## FAQ do Projeto LTD da Estácio
+
+    ### 1. Qual é o objetivo do projeto LTD?
+
+    O objetivo do projeto LTD é fornecer uma plataforma que combina um chatbot com inteligência artificial e um gerador de currículo em PDF para ajudar os usuários com suas necessidades de informações e criação de currículos.
+
+    ### 2. Quem está por trás do projeto LTD?
+
+    O projeto LTD é desenvolvido por uma equipe da Estácio, liderada pelo desenvolvedor Estevam Souza.
+
+    ### 3. O bot de WhatsApp AI responde a todas as perguntas?
+
+    O bot de WhatsApp AI foi treinado para responder a uma variedade de perguntas, mas pode não ter resposta para todas as consultas. Certifique-se de incluir informações claras em suas mensagens para obter as melhores respostas.
+
+    ---""")
 
 # Dashboard
 # ----------------------------------------------------------------------------------------------------------------------
@@ -321,7 +393,7 @@ def main():
     - Adicionar descrição e foto na barra lateral.
     - Incluir opções de navegação para outras páginas.
     """)
-    selected_page = st.sidebar.radio("Selecione uma página", [("Início 🏠", "Início"), ("ChatBot 💬", "ChatBot"), ("Gerador de Currículo 📄", "Gerador de Currículo"), ("Sobre ℹ️", "Sobre"), ("Ferramentas de IA 🛠️", "Ferramentas de IA"), ("Dashboard 📱", "Dashboard")], index=0)
+    selected_page = st.sidebar.radio("Selecione uma página", [("Início 🏠", "Início"), ("ChatBot 💬", "ChatBot"), ("Whatsapp 💬", "Whatsapp"), ("Gerador de Currículo 📄", "Gerador de Currículo"), ("Sobre ℹ️", "Sobre"), ("Ferramentas de IA 🛠️", "Ferramentas de IA"), ("Dashboard 📱", "Dashboard")], index=0)
     if selected_page[1] == "Início":
         initial_page()
     elif selected_page[1] == "ChatBot":
@@ -332,6 +404,8 @@ def main():
         about_page()
     elif selected_page[1] == "Dashboard":
         dash()
+    elif selected_page[1] == "Whatsapp":
+        whatsapp_ai_bot_help_page()
     else:
         ai_tools_page()
 
