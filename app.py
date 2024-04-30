@@ -4,12 +4,13 @@ from io import BytesIO
 import streamlit as st
 from streamlit_chat import message
 from langchain.chat_models import ChatOpenAI
+from itertools import zip_longest
 from langchain.schema import (
     SystemMessage,
     HumanMessage,
     AIMessage
 )
-from reportlab.lib.pagesizes import letter
+# from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 import pandas as pd  # pip install pandas openpyxl
