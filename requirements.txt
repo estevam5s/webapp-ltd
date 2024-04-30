@@ -4,6 +4,6 @@ python-dotenv
 langchain
 openai
 openpyxl
-pandas==2.0.1
-plotly==5.13.1
-reportlab==3.6.0
+pandas
+plotly
+reportlab
