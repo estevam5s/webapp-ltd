@@ -564,6 +564,9 @@ def hacker_prevention_page():
 
     st.title("Prevenção Contra Ataques de Hacker e Segurança na Dark Web e Deep Web")
 
+    # Embed video
+    st.video("https://www.youtube.com/watch?v=7V4jWIYhX9c")
+
     st.markdown("""
     ## Prevenção Contra Ataques de Hacker
 
