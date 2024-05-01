@@ -141,8 +141,6 @@ def chatbot_page():
     ---
     Feito por [Estevam Souza](https://github.com/estevam5s)""")
 
-
-
 # ------------------------------------------------------------------------------
 
 # Function for the "About" page
@@ -306,19 +304,29 @@ def whatsapp_ai_bot_help_page():
     st.markdown("""
     ## FAQ do Projeto LTD da Estácio
 
-    ### 1. Qual é o objetivo do projeto LTD?
+    <details>
+    <summary><b>1. Qual é o objetivo do projeto LTD?</b></summary>
 
     O objetivo do projeto LTD é fornecer uma plataforma que combina um chatbot com inteligência artificial e um gerador de currículo em PDF para ajudar os usuários com suas necessidades de informações e criação de currículos.
 
-    ### 2. Quem está por trás do projeto LTD?
+    </details>
 
-    O projeto LTD é desenvolvido por uma equipe da Estácio, liderada pelo desenvolvedor Estevam Souza.
+    <details>
+    <summary><b>2. Quem está por trás do projeto LTD?</b></summary>
 
-    ### 3. O bot de WhatsApp AI responde a todas as perguntas?
+    O projeto LTD é desenvolvido por uma equipe da Estácio, liderada pelo professor Vagner cordeiro.
+
+    </details>
+
+    <details>
+    <summary><b>3. O bot de WhatsApp AI responde a todas as perguntas?</b></summary>
 
     O bot de WhatsApp AI foi treinado para responder a uma variedade de perguntas, mas pode não ter resposta para todas as consultas. Certifique-se de incluir informações claras em suas mensagens para obter as melhores respostas.
 
+    </details>
+
     ---""")
+
 
 # Dashboard
 # ----------------------------------------------------------------------------------------------------------------------
@@ -524,6 +532,46 @@ def technology_news_page():
 
     """)
 
+# Function for the Hacker Prevention page
+def hacker_prevention_page():
+    st.title("Prevenção Contra Ataques de Hacker e Segurança na Dark Web e Deep Web")
+
+    st.markdown("""
+    ## Prevenção Contra Ataques de Hacker
+
+    Aqui estão algumas dicas para proteger seus sistemas e dados contra ataques de hackers:
+
+    ### 1. Mantenha Seu Software Atualizado
+    Mantenha todos os softwares, incluindo sistemas operacionais, navegadores da web e aplicativos, atualizados com as últimas atualizações de segurança. As atualizações frequentes ajudam a corrigir vulnerabilidades conhecidas.
+
+    ### 2. Use Senhas Fortes
+    Use senhas fortes e únicas para todas as suas contas online. Evite usar senhas óbvias ou fáceis de adivinhar, e considere usar um gerenciador de senhas para armazenar senhas com segurança.
+
+    ### 3. Tome Cuidado com Phishing
+    Esteja atento a e-mails de phishing e mensagens suspeitas que solicitam informações pessoais ou credenciais de login. Nunca clique em links suspeitos ou baixe anexos de fontes não confiáveis.
+
+    ## Dark Web e Deep Web
+
+    ### O Que É a Dark Web?
+    A Dark Web é uma parte da internet que não é acessível por meio de motores de busca convencionais, como o Google. É conhecida por ser um ambiente onde atividades ilegais, como venda de drogas, armas e informações roubadas, podem ocorrer.
+
+    ### O Que É a Deep Web?
+    A Deep Web é uma parte da internet que não é indexada pelos motores de busca tradicionais. Isso inclui sites protegidos por senhas, bancos de dados privados e conteúdo não acessível ao público em geral.
+
+    ### Como Se Prevenir na Dark Web e Deep Web?
+    - Evite acessar a Dark Web, pois ela pode expor você a atividades ilegais e conteúdo perigoso.
+    - Nunca compartilhe informações pessoais ou confidenciais em sites da Dark Web ou Deep Web.
+    - Mantenha seus dispositivos protegidos com software antivírus e firewall atualizados.
+    - Evite clicar em links suspeitos e baixar arquivos de fontes não confiáveis ao navegar na internet.
+    - Considere usar uma VPN (rede virtual privada) para proteger sua privacidade ao navegar online.
+
+    ### Como Acessar a Dark Web e Deep Web de Forma Segura?
+    Se você deseja acessar a Dark Web ou Deep Web por razões legítimas, siga estas precauções:
+    - Use um navegador especializado, como o Tor Browser, que oferece anonimato e criptografia.
+    - Nunca forneça informações pessoais ou financeiras ao acessar sites na Dark Web ou Deep Web.
+    - Evite clicar em links desconhecidos e verifique a reputação dos sites antes de acessá-los.
+
+    """)
 
 # Main function
 def main():
@@ -535,7 +583,7 @@ def main():
     - Adicionar descrição e foto na barra lateral.
     - Incluir opções de navegação para outras páginas.
     """)
-    selected_page = st.sidebar.radio("Selecione uma página", [("Início 🏠", "Início"), ("Jobs 💼", "Jobs"), ("Notícias 💻", "Notícias"), ("Material Estudos 📚", "Material Estudos"), ("ChatBot 💬", "ChatBot"), ("Whatsapp 💬", "Whatsapp"), ("Gerador de Currículo 📄", "Gerador de Currículo"), ("Sobre ℹ️", "Sobre"), ("Ferramentas de IA 🛠️", "Ferramentas de IA"), ("Dashboard 📱", "Dashboard")], index=0)
+    selected_page = st.sidebar.radio("Selecione uma página", [("Início 🏠", "Início"), ("Jobs 💼", "Jobs"), ("Notícias 💻", "Notícias"), ("Material Estudos 📚", "Material Estudos"), ("ChatBot 💬", "ChatBot"), ("Whatsapp 💬", "Whatsapp"), ("Gerador de Currículo 📄", "Gerador de Currículo"), ("Sobre ℹ️", "Sobre"), ("Ferramentas de IA 🛠️", "Ferramentas de IA"), ("Dashboard 📱", "Dashboard"), ("Darknet 👿", "Darknet")], index=0)
     if selected_page[1] == "Início":
         initial_page()
     elif selected_page[1] == "ChatBot":
@@ -554,6 +602,8 @@ def main():
         technology_news_page()
     elif selected_page[1] == "Whatsapp":
         whatsapp_ai_bot_help_page()
+    elif selected_page[1] == "Darknet":
+        hacker_prevention_page()
     else:
         ai_tools_page()
 
