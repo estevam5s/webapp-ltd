@@ -15,11 +15,15 @@ from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 import pandas as pd  # pip install pandas openpyxl
 import plotly.express as px  # pip install plotly-express
+from digital import curriculoVintage
 
 
 # Load environment variables
 load_dotenv()
 st.set_page_config(page_title="Sales Dashboard", page_icon=":bar_chart:", layout="wide")
+
+
+# ------------------------------------------------------------------------------
 
 # Initialize session state variables for chatbot
 def init_chatbot_session_state():
@@ -96,7 +100,6 @@ def init_session_state():
 
 
 # Function for the chatbot page
-# Function for the chatbot page
 def chatbot_page():
     st.title("ChatBot LTD")
 
@@ -138,46 +141,9 @@ def chatbot_page():
     ---
     Feito com 🤖 por [Estevam Souza](https://github.com/estevam5s)""")
 
-# Function for the resume generator page
-def generate_resume_page():
-    st.title("Gerador de Currículo")
 
-    init_resume_session_state()
 
-    name = st.text_input("Nome completo:", value=st.session_state['name'])
-    email = st.text_input("E-mail:", value=st.session_state['email'])
-    phone = st.text_input("Telefone:", value=st.session_state['phone'])
-    experience = st.text_area("Experiência Profissional:", value=st.session_state['experience'])
-    education = st.text_area("Educação:", value=st.session_state['education'])
-    skills = st.text_area("Habilidades:", value=st.session_state['skills'])
-
-    if st.button("Gerar Currículo em PDF"):
-        buffer = BytesIO()
-        doc = SimpleDocTemplate(buffer, pagesize=letter)
-
-        data = [
-            ["Nome:", name],
-            ["E-mail:", email],
-            ["Telefone:", phone],
-            ["Experiência Profissional:", experience],
-            ["Educação:", education],
-            ["Habilidades:", skills]
-        ]
-
-        table = Table(data, colWidths=150, rowHeights=30)
-        table.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
-            ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
-            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-            ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-            ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-        ]))
-
-        doc.build([table])
-
-        buffer.seek(0)
-        st.download_button(label="Baixar Currículo em PDF", data=buffer, file_name="curriculo.pdf", mime="application/pdf", key=None)
+# ------------------------------------------------------------------------------
 
 # Function for the "About" page
 def about_page():
@@ -575,7 +541,7 @@ def main():
     elif selected_page[1] == "ChatBot":
         chatbot_page()
     elif selected_page[1] == "Gerador de Currículo":
-        generate_resume_page()
+        curriculoVintage.curriculo()
     elif selected_page[1] == "Sobre":
         about_page()
     elif selected_page[1] == "Dashboard":
