@@ -139,7 +139,7 @@ def chatbot_page():
 
     st.markdown("""
     ---
-    Feito com 🤖 por [Estevam Souza](https://github.com/estevam5s)""")
+    Feito por [Estevam Souza](https://github.com/estevam5s)""")
 
 
 
@@ -163,7 +163,7 @@ def about_page():
     Para mais informações sobre nossa organização no GitHub, confira [aqui](https://github.com/suaorganizacao).
 
     ---    
-    Feito com ❤️ por [Seu Nome](https://github.com/seuusuario)""")
+    Feito com ❤️ por [Estevam Souza](https://github.com/estevam5s)""")
 
 # Function for the "AI Tools" page
 def ai_tools_page():
