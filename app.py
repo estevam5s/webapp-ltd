@@ -532,8 +532,36 @@ def technology_news_page():
 
     """)
 
+# Function to set theme to green and black
+def set_hacker_theme():
+    # Define custom CSS styles
+    hacker_custom_css = f"""
+        body {{
+            background-color: #000000;
+            color: #00FF00;
+        }}
+        .streamlit-button {{
+            color: #00FF00;
+            border-color: #00FF00;
+        }}
+        .streamlit-button:hover {{
+            color: #00FF00;
+            background-color: #000000;
+        }}
+        .streamlit-button:active {{
+            color: #00FF00;
+            background-color: #000000;
+        }}
+    """
+
+    # Set custom CSS styles
+    st.markdown(f'<style>{hacker_custom_css}</style>', unsafe_allow_html=True)
+
 # Function for the Hacker Prevention page
 def hacker_prevention_page():
+    # Set theme to green and black
+    set_hacker_theme()
+
     st.title("Prevenção Contra Ataques de Hacker e Segurança na Dark Web e Deep Web")
 
     st.markdown("""
