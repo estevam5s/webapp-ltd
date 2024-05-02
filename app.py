@@ -16,6 +16,7 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 import pandas as pd  # pip install pandas openpyxl
 import plotly.express as px  # pip install plotly-express
 from pages.digital import curriculoVintage
+from pages.GeminiChatbot import app_chat
 
 # Load environment variables
 load_dotenv()
@@ -516,27 +517,54 @@ def study_material_page():
 def technology_news_page():
     st.title("Notícias sobre Tecnologia")
 
-    st.markdown("""
-    ## Notícias sobre Tecnologia
+    # Sidebar navigation
+    st.sidebar.title('Navegação')
+    page = st.sidebar.radio('Ir para:', ('Últimas Notícias', 'Detalhes'))
 
-    Aqui estão algumas das últimas notícias sobre tecnologia:
+    if page == 'Últimas Notícias':
+        st.markdown("""
+        ## Notícias sobre Tecnologia
 
-    ### 1. Novo iPhone 14 Anunciado pela Apple
-    A Apple anunciou o lançamento do novo iPhone 14, que promete recursos avançados e melhorias significativas em relação aos modelos anteriores. O iPhone 14 apresenta uma nova tela OLED de alta resolução e uma câmera aprimorada com capacidades de fotografia computacional.
+        Aqui estão algumas das últimas notícias sobre tecnologia:
 
-    ### 2. Google Revela Avanços em IA
-    O Google revelou avanços impressionantes em inteligência artificial, incluindo um novo algoritmo de aprendizado de máquina capaz de superar desafios complexos de jogos de tabuleiro. Os pesquisadores do Google afirmam que o novo algoritmo demonstra uma capacidade sem precedentes de aprendizado e adaptação.
+        ### 1. Novo iPhone 14 Anunciado pela Apple
+        A Apple anunciou o lançamento do novo iPhone 14, que promete recursos avançados e melhorias significativas em relação aos modelos anteriores. O iPhone 14 apresenta uma nova tela OLED de alta resolução e uma câmera aprimorada com capacidades de fotografia computacional.
 
-    ### 3. Amazon Lança Novo Dispositivo de Casa Inteligente
-    A Amazon lançou um novo dispositivo de casa inteligente chamado Echo Hub, projetado para ser o centro de controle para dispositivos domésticos conectados. O Echo Hub oferece recursos avançados de voz e integração perfeita com outros dispositivos compatíveis com Alexa.
+        ### 2. Google Revela Avanços em IA
+        O Google revelou avanços impressionantes em inteligência artificial, incluindo um novo algoritmo de aprendizado de máquina capaz de superar desafios complexos de jogos de tabuleiro. Os pesquisadores do Google afirmam que o novo algoritmo demonstra uma capacidade sem precedentes de aprendizado e adaptação.
 
-    ### 4. Microsoft Anuncia Parceria com Empresa de Robótica
-    A Microsoft anunciou uma parceria estratégica com uma empresa líder em robótica para desenvolver soluções inovadoras para automação industrial e logística. A parceria visa combinar a expertise em software da Microsoft com a experiência em hardware da empresa de robótica para criar soluções de ponta.
+        ### 3. Amazon Lança Novo Dispositivo de Casa Inteligente
+        A Amazon lançou um novo dispositivo de casa inteligente chamado Echo Hub, projetado para ser o centro de controle para dispositivos domésticos conectados. O Echo Hub oferece recursos avançados de voz e integração perfeita com outros dispositivos compatíveis com Alexa.
 
-    ### 5. Facebook Lança Novo Recurso de Realidade Aumentada
-    O Facebook lançou um novo recurso de realidade aumentada chamado AR Studio, que permite aos usuários criar e compartilhar experiências imersivas de RA diretamente do aplicativo. O AR Studio oferece uma ampla gama de ferramentas e recursos para criar experiências interativas e envolventes.
+        ### 4. Microsoft Anuncia Parceria com Empresa de Robótica
+        A Microsoft anunciou uma parceria estratégica com uma empresa líder em robótica para desenvolver soluções inovadoras para automação industrial e logística. A parceria visa combinar a expertise em software da Microsoft com a experiência em hardware da empresa de robótica para criar soluções de ponta.
 
-    """)
+        ### 5. Facebook Lança Novo Recurso de Realidade Aumentada
+        O Facebook lançou um novo recurso de realidade aumentada chamado AR Studio, que permite aos usuários criar e compartilhar experiências imersivas de RA diretamente do aplicativo. O AR Studio oferece uma ampla gama de ferramentas e recursos para criar experiências interativas e envolventes.
+        """)
+
+    elif page == 'Detalhes':
+        st.markdown("""
+        ## Detalhes
+
+        Aqui estão alguns detalhes adicionais sobre as notícias:
+
+        ### Novo iPhone 14
+        A Apple anunciou várias novas características interessantes para o iPhone 14, incluindo uma nova tela OLED de alta resolução e uma câmera aprimorada com capacidades de fotografia computacional.
+
+        ### Avanços em IA
+        Os avanços em inteligência artificial revelados pelo Google têm o potencial de impactar uma ampla gama de indústrias, desde jogos até medicina e logística.
+
+        ### Novo Dispositivo de Casa Inteligente da Amazon
+        O Echo Hub da Amazon promete tornar a automação residencial mais acessível e conveniente para os usuários, oferecendo uma maneira fácil de controlar dispositivos domésticos inteligentes por meio de comandos de voz.
+
+        ### Parceria da Microsoft com Empresa de Robótica
+        A parceria estratégica entre a Microsoft e uma empresa de robótica sugere uma crescente ênfase na automação e na integração entre software e hardware para impulsionar a eficiência industrial.
+
+        ### Recurso de Realidade Aumentada do Facebook
+        O AR Studio do Facebook tem o potencial de transformar a forma como as pessoas interagem com a mídia social, permitindo a criação e o compartilhamento de experiências imersivas de realidade aumentada diretamente do aplicativo.
+        """)
+
 
 #TODO Page - Hacker Prevention
 # ------------------------------------------------------------------------------
@@ -572,45 +600,52 @@ def hacker_prevention_page():
 
     st.title("Prevenção Contra Ataques de Hacker e Segurança na Dark Web e Deep Web")
 
-    # Embed video
-    st.video("https://www.youtube.com/watch?v=7V4jWIYhX9c")
+    # Sidebar navigation
+    st.sidebar.title('Navegação')
+    page = st.sidebar.radio('Ir para:', ('Prevenção de Ataques de Hacker', 'Dark Web e Deep Web'))
 
-    st.markdown("""
-    ## Prevenção Contra Ataques de Hacker
+    if page == 'Prevenção de Ataques de Hacker':
+        st.video("https://www.youtube.com/watch?v=7V4jWIYhX9c")
 
-    Aqui estão algumas dicas para proteger seus sistemas e dados contra ataques de hackers:
+        st.markdown("""
+        ## Prevenção Contra Ataques de Hacker
 
-    ### 1. Mantenha Seu Software Atualizado
-    Mantenha todos os softwares, incluindo sistemas operacionais, navegadores da web e aplicativos, atualizados com as últimas atualizações de segurança. As atualizações frequentes ajudam a corrigir vulnerabilidades conhecidas.
+        Aqui estão algumas dicas para proteger seus sistemas e dados contra ataques de hackers:
 
-    ### 2. Use Senhas Fortes
-    Use senhas fortes e únicas para todas as suas contas online. Evite usar senhas óbvias ou fáceis de adivinhar, e considere usar um gerenciador de senhas para armazenar senhas com segurança.
+        ### 1. Mantenha Seu Software Atualizado
+        Mantenha todos os softwares, incluindo sistemas operacionais, navegadores da web e aplicativos, atualizados com as últimas atualizações de segurança. As atualizações frequentes ajudam a corrigir vulnerabilidades conhecidas.
 
-    ### 3. Tome Cuidado com Phishing
-    Esteja atento a e-mails de phishing e mensagens suspeitas que solicitam informações pessoais ou credenciais de login. Nunca clique em links suspeitos ou baixe anexos de fontes não confiáveis.
+        ### 2. Use Senhas Fortes
+        Use senhas fortes e únicas para todas as suas contas online. Evite usar senhas óbvias ou fáceis de adivinhar, e considere usar um gerenciador de senhas para armazenar senhas com segurança.
 
-    ## Dark Web e Deep Web
+        ### 3. Tome Cuidado com Phishing
+        Esteja atento a e-mails de phishing e mensagens suspeitas que solicitam informações pessoais ou credenciais de login. Nunca clique em links suspeitos ou baixe anexos de fontes não confiáveis.
+        """)
 
-    ### O Que É a Dark Web?
-    A Dark Web é uma parte da internet que não é acessível por meio de motores de busca convencionais, como o Google. É conhecida por ser um ambiente onde atividades ilegais, como venda de drogas, armas e informações roubadas, podem ocorrer.
+    elif page == 'Dark Web e Deep Web':
+        st.markdown("""
+        ## Dark Web e Deep Web
 
-    ### O Que É a Deep Web?
-    A Deep Web é uma parte da internet que não é indexada pelos motores de busca tradicionais. Isso inclui sites protegidos por senhas, bancos de dados privados e conteúdo não acessível ao público em geral.
+        ### O Que É a Dark Web?
+        A Dark Web é uma parte da internet que não é acessível por meio de motores de busca convencionais, como o Google. É conhecida por ser um ambiente onde atividades ilegais, como venda de drogas, armas e informações roubadas, podem ocorrer.
 
-    ### Como Se Prevenir na Dark Web e Deep Web?
-    - Evite acessar a Dark Web, pois ela pode expor você a atividades ilegais e conteúdo perigoso.
-    - Nunca compartilhe informações pessoais ou confidenciais em sites da Dark Web ou Deep Web.
-    - Mantenha seus dispositivos protegidos com software antivírus e firewall atualizados.
-    - Evite clicar em links suspeitos e baixar arquivos de fontes não confiáveis ao navegar na internet.
-    - Considere usar uma VPN (rede virtual privada) para proteger sua privacidade ao navegar online.
+        ### O Que É a Deep Web?
+        A Deep Web é uma parte da internet que não é indexada pelos motores de busca tradicionais. Isso inclui sites protegidos por senhas, bancos de dados privados e conteúdo não acessível ao público em geral.
 
-    ### Como Acessar a Dark Web e Deep Web de Forma Segura?
-    Se você deseja acessar a Dark Web ou Deep Web por razões legítimas, siga estas precauções:
-    - Use um navegador especializado, como o Tor Browser, que oferece anonimato e criptografia.
-    - Nunca forneça informações pessoais ou financeiras ao acessar sites na Dark Web ou Deep Web.
-    - Evite clicar em links desconhecidos e verifique a reputação dos sites antes de acessá-los.
+        ### Como Se Prevenir na Dark Web e Deep Web?
+        - Evite acessar a Dark Web, pois ela pode expor você a atividades ilegais e conteúdo perigoso.
+        - Nunca compartilhe informações pessoais ou confidenciais em sites da Dark Web ou Deep Web.
+        - Mantenha seus dispositivos protegidos com software antivírus e firewall atualizados.
+        - Evite clicar em links suspeitos e baixar arquivos de fontes não confiáveis ao navegar na internet.
+        - Considere usar uma VPN (rede virtual privada) para proteger sua privacidade ao navegar online.
 
-    """)
+        ### Como Acessar a Dark Web e Deep Web de Forma Segura?
+        Se você deseja acessar a Dark Web ou Deep Web por razões legítimas, siga estas precauções:
+        - Use um navegador especializado, como o Tor Browser, que oferece anonimato e criptografia.
+        - Nunca forneça informações pessoais ou financeiras ao acessar sites na Dark Web ou Deep Web.
+        - Evite clicar em links desconhecidos e verifique a reputação dos sites antes de acessá-los.
+        """)
+
 
 # Main function
 def main():
@@ -626,7 +661,7 @@ def main():
     if selected_page[1] == "Início":
         initial_page()
     elif selected_page[1] == "ChatBot":
-        chatbot_page()
+        app_chat.chatbotGemeni()
     elif selected_page[1] == "Gerador de Currículo":
         curriculoVintage.curriculo()
     elif selected_page[1] == "Sobre":
