@@ -15,16 +15,14 @@ from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 import pandas as pd  # pip install pandas openpyxl
 import plotly.express as px  # pip install plotly-express
-from digital import curriculoVintage
-
+from pages.digital import curriculoVintage
 
 # Load environment variables
 load_dotenv()
 st.set_page_config(page_title="Sales Dashboard", page_icon=":bar_chart:", layout="wide")
 
-
+#TODO Page - chatbot
 # ------------------------------------------------------------------------------
-
 # Initialize session state variables for chatbot
 def init_chatbot_session_state():
     if 'generated' not in st.session_state:
@@ -141,8 +139,8 @@ def chatbot_page():
     ---
     Feito por [Estevam Souza](https://github.com/estevam5s)""")
 
+#TODO Page - About
 # ------------------------------------------------------------------------------
-
 # Function for the "About" page
 def about_page():
     st.title("Sobre")
@@ -163,6 +161,8 @@ def about_page():
     ---    
     Feito com ❤️ por [Estevam Souza](https://github.com/estevam5s)""")
 
+#TODO Page - AI Tools
+# ------------------------------------------------------------------------------
 # Function for the "AI Tools" page
 def ai_tools_page():
     st.title("Ferramentas de IA")
@@ -181,6 +181,8 @@ def ai_tools_page():
 
     ---""")
 
+#TODO Page - IT Jobs
+# ------------------------------------------------------------------------------
 # Function for the IT Jobs page
 def it_jobs_page():
     st.title("Vagas de Emprego em TI")
@@ -256,6 +258,8 @@ def it_jobs_page():
 
     """)
 
+#TODO Page - initial
+# ------------------------------------------------------------------------------
 # Function for the initial page
 def initial_page():
     st.title("Bem-vindo ao Projeto LTD!")
@@ -280,6 +284,8 @@ def initial_page():
 
     """)
 
+#TODO Page - WhatsApp AI
+# ------------------------------------------------------------------------------
 # Function for the WhatsApp AI Bot Help page
 def whatsapp_ai_bot_help_page():
     st.title("Ajuda do WhatsApp AI Bot")
@@ -327,10 +333,8 @@ def whatsapp_ai_bot_help_page():
 
     ---""")
 
-
-# Dashboard
+#TODO Page - Dashboard
 # ----------------------------------------------------------------------------------------------------------------------
-
 def dash():
 
     # ---- READ EXCEL ----
@@ -449,8 +453,8 @@ def dash():
                 """
     st.markdown(hide_st_style, unsafe_allow_html=True)
 
-# ----------------------------------------------------------------------------------------------------------------------
-
+#TODO Page - Study Material
+# ------------------------------------------------------------------------------
 # Function for the Study Material page
 def study_material_page():
     st.title("Material de Estudos em TI")
@@ -506,6 +510,8 @@ def study_material_page():
 
     """)
 
+#TODO Page - Technology News
+# ------------------------------------------------------------------------------
 # Function for the Technology News page
 def technology_news_page():
     st.title("Notícias sobre Tecnologia")
@@ -532,6 +538,8 @@ def technology_news_page():
 
     """)
 
+#TODO Page - Hacker Prevention
+# ------------------------------------------------------------------------------
 # Function to set theme to green and black
 def set_hacker_theme():
     # Define custom CSS styles
