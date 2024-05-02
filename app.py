@@ -403,26 +403,54 @@ def it_jobs_page():
 def initial_page():
     st.title("Bem-vindo ao Projeto LTD!")
     
-    # Adicionando informações sobre o Projeto LTD
+    # Descrição da Estácio
     st.markdown("""
-    ## Sobre o Projeto LTD
-
-    O Projeto LTD é uma iniciativa da Estácio que visa combinar tecnologia e educação para fornecer soluções inovadoras aos alunos e à comunidade em geral. O projeto inclui um chatbot com inteligência artificial para assistência personalizada e um gerador de currículo em PDF para ajudar os usuários a criar currículos profissionais de forma rápida e fácil.
-
     ## Sobre a Estácio
 
     A Estácio é uma instituição de ensino superior comprometida em oferecer educação de qualidade e acessível para todos. Com uma ampla gama de cursos e programas, a Estácio prepara os alunos para enfrentar os desafios do mercado de trabalho e alcançar seus objetivos profissionais.
-
-    ## LTDs do Passado
-
-    Aqui estão algumas imagens de LTDs do passado:
-
-    ![LTD 1](https://example.com/ltd1.jpg)
-    ![LTD 2](https://example.com/ltd2.jpg)
-    ![LTD 3](https://example.com/ltd3.jpg)
-
     """)
+    
+    # Descrição do Projeto LTD
+    st.markdown("""
+    ## Sobre o Projeto LTD
 
+    O Projeto LTD é uma iniciativa da Estácio que visa combinar tecnologia e educação para fornecer soluções inovadoras aos alunos e à comunidade em geral. Este semestre, o foco do projeto é desenvolver ferramentas de inteligência artificial (IA) para auxiliar na recolocação e no desenvolvimento profissional de membros da comunidade e profissionais em busca de aprimoramento.
+    """)
+    
+    # Adicionar seção de funcionalidades do projeto
+    st.header("Funcionalidades do Projeto")
+    st.markdown("""
+    O Projeto LTD deste semestre apresenta duas principais funcionalidades:
+
+    ### Chatbot com Inteligência Artificial
+
+    O chatbot com inteligência artificial foi projetado para oferecer assistência personalizada aos usuários, fornecendo informações sobre oportunidades de emprego, dicas de carreira, cursos disponíveis e muito mais. Ele é capaz de responder a uma variedade de perguntas e fornecer orientações relevantes para ajudar os usuários em suas jornadas profissionais.
+
+    ### Gerador de Currículo em PDF
+
+    O gerador de currículo em PDF é uma ferramenta prática para criar currículos profissionais de forma rápida e fácil. Os usuários podem preencher informações sobre sua experiência profissional, habilidades, educação e outras qualificações relevantes, e o gerador produzirá um currículo formatado profissionalmente em formato PDF pronto para ser enviado para potenciais empregadores.
+    """)
+    
+    # Adicionar imagens dos LTDs passados
+    st.header("LTDs do Passado")
+    st.markdown("""
+    Aqui estão algumas imagens de LTDs do passado:
+    """)
+    
+    ltd_images = [
+        "https://example.com/ltd1.jpg",
+        "https://example.com/ltd2.jpg",
+        "https://example.com/ltd3.jpg"
+    ]
+    
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.image(ltd_images[0], use_column_width=True)
+    with col2:
+        st.image(ltd_images[1], use_column_width=True)
+    with col3:
+        st.image(ltd_images[2], use_column_width=True)
+    
 #TODO Page - WhatsApp AI
 # ------------------------------------------------------------------------------
 # Function for the WhatsApp AI Bot Help page
@@ -790,11 +818,16 @@ def main():
     st.sidebar.image("estacio.jpg", use_column_width=True)
     st.sidebar.title("Menu")
     st.sidebar.markdown("""
-    - Implementação da página inicial do projeto.
-    - Adição de informações sobre o projeto LTD.
-    - Adicionar descrição e foto na barra lateral.
-    - Incluir opções de navegação para outras páginas.
+        ## Sobre o Projeto LTD
+        
+        O Projeto Laboratório de Transformação Digital (LTD) é uma iniciativa da Estácio que visa integrar tecnologia e educação para oferecer soluções inovadoras aos alunos e à comunidade. Este semestre, o foco do projeto é desenvolver ferramentas de inteligência artificial para auxiliar na recolocação e no desenvolvimento profissional.
+    
+        ## Funcionalidades do Projeto
+        
+        - **Chatbot com Inteligência Artificial:** Oferece assistência personalizada aos usuários, fornecendo informações sobre oportunidades de emprego, dicas de carreira e cursos disponíveis.
+        - **Gerador de Currículo em PDF:** Permite criar currículos profissionais de forma rápida e fácil, facilitando a busca por emprego.
     """)
+    
     selected_page = st.sidebar.radio("Selecione uma página", ["🏠 Início", "💼 Jobs", "💻 Notícias", "📚 Material Estudos", "💬 ChatBot", "💬 Whatsapp", "📄 Gerador de Currículo", "ℹ️ Sobre", "🛠️ Ferramentas de IA", "📱 Dashboard", "👿 Darknet"], index=0)
     if selected_page == "🏠 Início":
         initial_page()
