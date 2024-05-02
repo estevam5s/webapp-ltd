@@ -6,4 +6,7 @@ openai
 openpyxl
 pandas
 plotly
+joblib
 reportlab
+joblib==1.3.2
+google-generativeai==0.3.1
