@@ -455,50 +455,49 @@ def initial_page():
 # ------------------------------------------------------------------------------
 # Function for the WhatsApp AI Bot Help page
 def whatsapp_ai_bot_help_page():
-    st.title("Ajuda do WhatsApp AI Bot")
+    page = st.sidebar.radio("Selecione uma página", ["Sobre a Automação com WhatsApp", "Utilizando IA para Respostas", "Usando o Typebot"])
 
-    st.markdown("""
-    # Ajuda do WhatsApp AI Bot
+    if page == "Sobre a Automação com WhatsApp":
+        st.title("Sobre a Automação com WhatsApp")
+        st.markdown("""
 
-    Você pode usar o bot de WhatsApp AI para obter respostas para suas perguntas. Aqui está como:
+        A automação com WhatsApp permite automatizar interações e respostas no WhatsApp. Aqui está como começar:
 
-    1. Adicione o número de WhatsApp do bot à sua lista de contatos.
-    2. Envie uma mensagem para o bot com sua pergunta.
-    3. O bot responderá automaticamente com uma resposta baseada na inteligência artificial.
+        1. Integre uma plataforma de automação, como Twilio ou ChatGPT, com o WhatsApp Business API.
+        2. Configure respostas automáticas para mensagens recebidas com base em palavras-chave ou padrões.
+        3. Implemente fluxos de conversação para guiar os usuários através de interações automatizadas.
 
-    Certifique-se de incluir informações claras e concisas em suas mensagens para obter as melhores respostas do bot.
+        Com a automação do WhatsApp, você pode melhorar a eficiência e a experiência do usuário em suas interações comerciais.
 
-    ## Links Úteis
-    - [Adicionar Bot do WhatsApp](https://api.whatsapp.com/send/?phone=seunumerodewhatsapp)
-    - [FAQ do Projeto LTD da Estácio](#faq)
+        ---""")
+    
+    elif page == "Utilizando IA para Respostas":
+        st.title("Utilizando IA para Respostas")
+        st.markdown("""
+        A inteligência artificial (IA) pode ser integrada ao WhatsApp para fornecer respostas automáticas avançadas. Aqui está como fazer isso:
 
-    ---""")
+        1. Treine um modelo de IA com dados de perguntas frequentes e suas respostas correspondentes.
+        2. Implemente o modelo treinado em uma plataforma de automação, como Twilio ou Dialogflow.
+        3. Configure gatilhos para acionar respostas do modelo de IA com base nas mensagens recebidas.
 
-    st.markdown("""
-    ## FAQ do Projeto LTD da Estácio
+        Com a IA, é possível oferecer respostas mais sofisticadas e personalizadas aos usuários do WhatsApp.
 
-    <details>
-    <summary><b>1. Qual é o objetivo do projeto LTD?</b></summary>
+        ---""")
 
-    O objetivo do projeto LTD é fornecer uma plataforma que combina um chatbot com inteligência artificial e um gerador de currículo em PDF para ajudar os usuários com suas necessidades de informações e criação de currículos.
+    elif page == "Usando o Typebot":
+        st.markdown("""
+        # Usando o Typebot
 
-    </details>
+        O Typebot é uma plataforma de criação de chatbots que pode ser integrada ao WhatsApp. Aqui está como começar:
 
-    <details>
-    <summary><b>2. Quem está por trás do projeto LTD?</b></summary>
+        1. Crie um chatbot personalizado no Typebot com respostas automáticas para perguntas frequentes.
+        2. Integre o chatbot do Typebot com o WhatsApp Business API usando as ferramentas de integração fornecidas.
+        3. Configure as regras de encaminhamento para direcionar mensagens recebidas no WhatsApp para o chatbot do Typebot.
 
-    O projeto LTD é desenvolvido por uma equipe da Estácio, liderada pelo professor Vagner cordeiro.
+        Com o Typebot, é possível criar e gerenciar chatbots poderosos para interações automatizadas no WhatsApp.
 
-    </details>
+        ---""")
 
-    <details>
-    <summary><b>3. O bot de WhatsApp AI responde a todas as perguntas?</b></summary>
-
-    O bot de WhatsApp AI foi treinado para responder a uma variedade de perguntas, mas pode não ter resposta para todas as consultas. Certifique-se de incluir informações claras em suas mensagens para obter as melhores respostas.
-
-    </details>
-
-    ---""")
 
 #TODO Page - Dashboard
 # ----------------------------------------------------------------------------------------------------------------------
@@ -828,7 +827,17 @@ def main():
         - **Gerador de Currículo em PDF:** Permite criar currículos profissionais de forma rápida e fácil, facilitando a busca por emprego.
     """)
     
-    selected_page = st.sidebar.radio("Selecione uma página", ["🏠 Início", "💼 Jobs", "💻 Notícias", "📚 Material Estudos", "💬 ChatBot", "💬 Whatsapp", "📄 Gerador de Currículo", "ℹ️ Sobre", "🛠️ Ferramentas de IA", "📱 Dashboard", "👿 Darknet"], index=0)
+    selected_page = st.sidebar.radio("Selecione uma página", ["🏠 Início",
+        "💼 Jobs",
+        "📚 Material Estudos", 
+        "💻 Notícias",
+        "🔗 Sobre",
+        "🛠️ Ferramentas de IA",
+        "📱 Dashboard",
+        "📄 Gerador de Currículo",
+        "💬 Whatsapp",
+        "🤖 ChatBot",
+        "👿 Darknet"], index=0)
     if selected_page == "🏠 Início":
         initial_page()
     elif selected_page == "💬 ChatBot":
