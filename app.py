@@ -844,7 +844,7 @@ def main():
         chatbotGemeni()
     elif selected_page == "📄 Gerador de Currículo":
         curriculoVintage.curriculo()
-    elif selected_page == "ℹ️ Sobre":
+    elif selected_page == "🔗 Sobre":
         about_page()
     elif selected_page == "📱 Dashboard":
         dash()
