@@ -795,26 +795,26 @@ def main():
     - Adicionar descrição e foto na barra lateral.
     - Incluir opções de navegação para outras páginas.
     """)
-    selected_page = st.sidebar.radio("Selecione uma página", [("Início 🏠", "Início"), ("Jobs 💼", "Jobs"), ("Notícias 💻", "Notícias"), ("Material Estudos 📚", "Material Estudos"), ("ChatBot 💬", "ChatBot"), ("Whatsapp 💬", "Whatsapp"), ("Gerador de Currículo 📄", "Gerador de Currículo"), ("Sobre ℹ️", "Sobre"), ("Ferramentas de IA 🛠️", "Ferramentas de IA"), ("Dashboard 📱", "Dashboard"), ("Darknet 👿", "Darknet")], index=0)
-    if selected_page[1] == "Início":
+    selected_page = st.sidebar.radio("Selecione uma página", ["🏠 Início", "💼 Jobs", "💻 Notícias", "📚 Material Estudos", "💬 ChatBot", "💬 Whatsapp", "📄 Gerador de Currículo", "ℹ️ Sobre", "🛠️ Ferramentas de IA", "📱 Dashboard", "👿 Darknet"], index=0)
+    if selected_page == "🏠 Início":
         initial_page()
-    elif selected_page[1] == "ChatBot":
+    elif selected_page == "💬 ChatBot":
         chatbotGemeni()
-    elif selected_page[1] == "Gerador de Currículo":
+    elif selected_page == "📄 Gerador de Currículo":
         curriculoVintage.curriculo()
-    elif selected_page[1] == "Sobre":
+    elif selected_page == "ℹ️ Sobre":
         about_page()
-    elif selected_page[1] == "Dashboard":
+    elif selected_page == "📱 Dashboard":
         dash()
-    elif selected_page[1] == "Jobs":
+    elif selected_page == "💼 Jobs":
         it_jobs_page()
-    elif selected_page[1] == "Material Estudos":
+    elif selected_page == "📚 Material Estudos":
         study_material_page()
-    elif selected_page[1] == "Notícias":
+    elif selected_page == "💻 Notícias":
         technology_news_page()
-    elif selected_page[1] == "Whatsapp":
+    elif selected_page == "💬 Whatsapp":
         whatsapp_ai_bot_help_page()
-    elif selected_page[1] == "Darknet":
+    elif selected_page == "👿 Darknet":
         hacker_prevention_page()
     else:
         ai_tools_page()
