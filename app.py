@@ -800,7 +800,7 @@ def main():
     if selected_page[1] == "Início":
         initial_page()
     elif selected_page[1] == "ChatBot":
-        bot.chatbotGemeni()
+        chatbotGemeni()
     elif selected_page[1] == "Gerador de Currículo":
         curriculoVintage.curriculo()
     elif selected_page[1] == "Sobre":
