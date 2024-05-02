@@ -16,7 +16,7 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 import pandas as pd  # pip install pandas openpyxl
 import plotly.express as px  # pip install plotly-express
 from pages.digital import curriculoVintage
-from pages.GeminiChatbot import app_chat
+from pages.GeminiChatbot import app_chat as bot
 
 # Load environment variables
 load_dotenv()
@@ -661,7 +661,7 @@ def main():
     if selected_page[1] == "Início":
         initial_page()
     elif selected_page[1] == "ChatBot":
-        app_chat.chatbotGemeni()
+        bot.chatbotGemeni()
     elif selected_page[1] == "Gerador de Currículo":
         curriculoVintage.curriculo()
     elif selected_page[1] == "Sobre":
