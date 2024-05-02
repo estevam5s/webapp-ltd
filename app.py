@@ -726,7 +726,7 @@ def main():
         "👿 Darknet"], index=0)
     if selected_page == "🏠 Início":
         initial_page()
-    elif selected_page == "💬 ChatBot":
+    elif selected_page == "🤖 ChatBot":
         chatbotGemeni()
     elif selected_page == "📄 Gerador de Currículo":
         curriculoVintage.curriculo()
