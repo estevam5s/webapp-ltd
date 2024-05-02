@@ -16,7 +16,6 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 import pandas as pd  # pip install pandas openpyxl
 import plotly.express as px  # pip install plotly-express
 from pages.digital import curriculoVintage
-from pages.GeminiChatbot import app_chat as bot
 import time
 import os
 import joblib
