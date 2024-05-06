@@ -100,59 +100,7 @@ def curriculo():
     # --- Preview and Download Resume Buttons ---
     st.markdown("---")
     col1, col2 = st.columns(2)
-    # if col1.button("Preview Resume", key="preview_resume"):
-    #     buffer = BytesIO()
-    #     doc = SimpleDocTemplate(buffer, pagesize=letter)
-    #     styles = getSampleStyleSheet()
-    #     normal_style = styles['Normal']
-    #     title_style = styles['Title']
-    #     heading_style = styles['Heading1']
-        
-    #     elements = []
-        
-    #     elements.append(Paragraph(name, title_style))
-    #     elements.append(Spacer(1, 12))
-    #     elements.append(Paragraph(description, normal_style))
-    #     elements.append(Spacer(1, 12))
-        
-    #     elements.append(Paragraph("Social Media:", heading_style))
-    #     for platform, link in social_media.items():
-    #         elements.append(Paragraph(f"{platform}: {link}", normal_style))
-        
-    #     elements.append(Spacer(1, 12))
-    #     elements.append(Paragraph("Experience & Qualifications:", heading_style))
-    #     elements.append(Paragraph("- ✔️ Describe your experience and qualifications here.", normal_style))
-        
-    #     elements.append(Spacer(1, 12))
-    #     elements.append(Paragraph("Hard Skills:", heading_style))
-    #     elements.append(Paragraph("- Describe your hard skills here.", normal_style))
-        
-    #     elements.append(Spacer(1, 12))
-    #     elements.append(Paragraph("Work History:", heading_style))
-    #     elements.append(Spacer(1, 6))
-        
-    #     # --- JOB 1 ---
-    #     elements.append(Paragraph("🚧 Job Title 1 | Company Name", normal_style))
-    #     elements.append(Paragraph(f"Start Date: {start_date_job1}  End Date: {end_date_job1}", normal_style))
-    #     elements.append(Paragraph(f"Responsibilities: {responsibilities_job1}", normal_style))
-        
-    #     # --- JOB 2 ---
-    #     elements.append(Paragraph("🚧 Job Title 2 | Company Name", normal_style))
-    #     elements.append(Paragraph(f"Start Date: {start_date_job2}  End Date: {end_date_job2}", normal_style))
-    #     elements.append(Paragraph(f"Responsibilities: {responsibilities_job2}", normal_style))
-        
-    #     # --- JOB 3 ---
-    #     elements.append(Paragraph("🚧 Job Title 3 | Company Name", normal_style))
-    #     elements.append(Paragraph(f"Start Date: {start_date_job3}  End Date: {end_date_job3}", normal_style))
-    #     elements.append(Paragraph(f"Responsibilities: {responsibilities_job3}", normal_style))
-        
-    #     elements.append(Spacer(1, 12))
-    #     elements.append(Paragraph("Projects & Accomplishments:", heading_style))
-    #     elements.append(Paragraph(f"{project_name}: {project_link}", normal_style))
-        
-    #     doc.build(elements)
-    #     buffer.seek(0)
-    #     st.write(buffer.getvalue())
+
     if col2.button("Download Resume", key="download_resume"):
         buffer = BytesIO()
         doc = SimpleDocTemplate(buffer, pagesize=letter)

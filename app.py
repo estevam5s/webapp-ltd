@@ -1,5 +1,6 @@
 # Import required libraries
 from dotenv import load_dotenv
+import qrcode
 from io import BytesIO
 import streamlit as st
 from streamlit_chat import message
@@ -283,7 +284,6 @@ def chatbot_page():
 # ------------------------------------------------------------------------------
 # Function for the "About" page
 def about_page():
-    st.title("Sobre")
     st.markdown("""
     # Bem-vindo ao ChatBot LTD!
 
@@ -307,8 +307,6 @@ def about_page():
 def ai_tools_page():
     st.title("Ferramentas de IA")
     st.markdown("""
-    # Ferramentas de IA
-
     Aqui estão algumas ferramentas de inteligência artificial que podem ser úteis:
 
     - [OpenAI](https://openai.com): Plataforma de inteligência artificial que oferece uma série de modelos e ferramentas para desenvolvedores.
@@ -328,8 +326,6 @@ def it_jobs_page():
     st.title("Vagas de Emprego em TI")
 
     st.markdown("""
-    ## Vagas de Emprego em TI
-
     Aqui estão algumas das vagas de emprego disponíveis na área de Tecnologia da Informação:
 
     ### Desenvolvedor de Software
@@ -456,12 +452,14 @@ def initial_page():
 # ------------------------------------------------------------------------------
 # Function for the WhatsApp AI Bot Help page
 def whatsapp_ai_bot_help_page():
-    page = st.sidebar.radio("Selecione uma página", ["Sobre a Automação com WhatsApp", "Utilizando IA para Respostas", "Usando o Typebot"])
+    page = st.sidebar.radio("Selecione uma página", ["Chatbot com Interface Whatsapp Web", "Chatbot com Interface IA", "Sobre a Automação com WhatsApp", "Utilizando IA para Respostas", "Usando o Typebot"])
+
+    if page == "Chatbot com Interface IA":
+        chatbotGemeni()
 
     if page == "Sobre a Automação com WhatsApp":
         st.title("Sobre a Automação com WhatsApp")
         st.markdown("""
-
         A automação com WhatsApp permite automatizar interações e respostas no WhatsApp. Aqui está como começar:
 
         1. Integre uma plataforma de automação, como Twilio ou ChatGPT, com o WhatsApp Business API.
@@ -486,9 +484,8 @@ def whatsapp_ai_bot_help_page():
         ---""")
 
     elif page == "Usando o Typebot":
+        st.title("Usando o Typebot")
         st.markdown("""
-        # Usando o Typebot
-
         O Typebot é uma plataforma de criação de chatbots que pode ser integrada ao WhatsApp. Aqui está como começar:
 
         1. Crie um chatbot personalizado no Typebot com respostas automáticas para perguntas frequentes.
@@ -499,6 +496,16 @@ def whatsapp_ai_bot_help_page():
 
         ---""")
 
+    elif page == "Chatbot com Interface Whatsapp Web":
+        st.title("Chatbot com Interface Web do WhatsApp")
+        st.markdown("""
+        A interface web do WhatsApp permite interagir com um chatbot diretamente no navegador. Aqui está como acessar o chatbot:
+
+        1. Abra o seguinte link em seu navegador: [Chatbot com Interface Web do WhatsApp](https://typebot.co/whatsapp-ltd-estacio-ia)
+        2. Use o seu smartphone para escanear o QrCode abaixo e acessar o chatbot.
+        
+        """)
+        st.image("qrcode_typebot.co.png", width=300)
 
 #TODO Page - Dashboard
 # ----------------------------------------------------------------------------------------------------------------------
@@ -574,8 +581,6 @@ def technology_news_page():
 
     if page == 'Últimas Notícias':
         st.markdown("""
-        ## Notícias sobre Tecnologia
-
         Aqui estão algumas das últimas notícias sobre tecnologia:
 
         ### 1. Novo iPhone 14 Anunciado pela Apple
@@ -721,13 +726,10 @@ def main():
         "🛠️ Ferramentas de IA",
         "📱 Dashboard",
         "📄 Gerador de Currículo",
-        "💬 Whatsapp",
         "🤖 ChatBot",
         "👿 Darknet"], index=0)
     if selected_page == "🏠 Início":
         initial_page()
-    elif selected_page == "🤖 ChatBot":
-        chatbotGemeni()
     elif selected_page == "📄 Gerador de Currículo":
         curriculoVintage.curriculo()
     elif selected_page == "🔗 Sobre":
@@ -740,7 +742,7 @@ def main():
         study_material_page()
     elif selected_page == "💻 Notícias":
         technology_news_page()
-    elif selected_page == "💬 Whatsapp":
+    elif selected_page == "🤖 ChatBot":
         whatsapp_ai_bot_help_page()
     elif selected_page == "👿 Darknet":
         hacker_prevention_page()
