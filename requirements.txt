@@ -10,3 +10,4 @@ joblib
 reportlab
 joblib
 google-generativeai
+qrcode
