@@ -1,5 +1,6 @@
 # Import required libraries
 from dotenv import load_dotenv
+import requests
 import qrcode
 from io import BytesIO
 import streamlit as st
@@ -545,17 +546,22 @@ def whatsapp_ai_bot_help_page():
         ---""")
     
     elif page == "Utilizando IA para Respostas":
-        st.title("Utilizando IA para Respostas")
-        st.markdown("""
-        A inteligência artificial (IA) pode ser integrada ao WhatsApp para fornecer respostas automáticas avançadas. Aqui está como fazer isso:
-
-        1. Treine um modelo de IA com dados de perguntas frequentes e suas respostas correspondentes.
-        2. Implemente o modelo treinado em uma plataforma de automação, como Twilio ou Dialogflow.
-        3. Configure gatilhos para acionar respostas do modelo de IA com base nas mensagens recebidas.
-
-        Com a IA, é possível oferecer respostas mais sofisticadas e personalizadas aos usuários do WhatsApp.
-
-        ---""")
+            st.title("Utilizando IA para Respostas")
+            st.markdown("""
+            A inteligência artificial (IA) pode ser integrada ao WhatsApp para fornecer respostas automáticas avançadas. Aqui está como fazer isso:
+    
+            1. Treine um modelo de IA com dados de perguntas frequentes e suas respostas correspondentes.
+            2. Implemente o modelo treinado em uma plataforma de automação, como Twilio ou Dialogflow.
+            3. Configure gatilhos para acionar respostas do modelo de IA com base nas mensagens recebidas.
+    
+            Com a IA, é possível oferecer respostas mais sofisticadas e personalizadas aos usuários do WhatsApp.
+    
+            ---""")
+            st.markdown("""
+            Neste projeto, optei por utilizar a API do Gemini do Google para implementar a inteligência artificial. A API do Gemini oferece funcionalidades básicas gratuitas, como tradução de texto e detecção de idioma, o que a torna uma opção adequada para este propósito específico.
+    
+            Para obter acesso mais amplo a recursos avançados de IA, como geração de texto avançada, a API do ChatGPT pode ser uma escolha ideal, embora tenha um modelo de precificação baseado no uso, incluindo uma opção gratuita limitada e planos pagos para acesso mais amplo.
+            """)
 
     elif page == "Usando o Typebot":
         st.title("Usando o Typebot")
@@ -647,54 +653,53 @@ def study_material_page():
 # ------------------------------------------------------------------------------
 # Function for the Technology News page
 def technology_news_page():
-    st.title("Notícias sobre Tecnologia")
+  # Define a função para obter as notícias sobre inteligência artificial e linguagens de programação da API
+  def get_ai_news():
+      try:
+          url = "https://newsapi.org/v2/everything"
+          params = {
+              "q": "artificial intelligence OR programming language",
+              "apiKey": "adefb2b75dd2463b82c7611c86c09b74"  # Substitua "SUA_CHAVE_DE_API_AQUI" pela sua chave de API
+          }
+          response = requests.get(url, params=params)
+          data = response.json()
 
-    # Sidebar navigation
-    st.sidebar.title('Navegação')
-    page = st.sidebar.radio('Ir para:', ('Últimas Notícias', 'Detalhes'))
+          # Verifica se há erro na resposta
+          if response.status_code != 200 or data.get("status") != "ok":
+              st.error("Erro ao recuperar as notícias. Por favor, tente novamente mais tarde.")
+              return None
 
-    if page == 'Últimas Notícias':
-        st.markdown("""
-        Aqui estão algumas das últimas notícias sobre tecnologia:
+          articles = data.get("articles", [])
 
-        ### 1. Novo iPhone 14 Anunciado pela Apple
-        A Apple anunciou o lançamento do novo iPhone 14, que promete recursos avançados e melhorias significativas em relação aos modelos anteriores. O iPhone 14 apresenta uma nova tela OLED de alta resolução e uma câmera aprimorada com capacidades de fotografia computacional.
+          # Verifica se há notícias disponíveis
+          if articles:
+              return articles
+          else:
+              st.error("Nenhuma notícia encontrada sobre inteligência artificial ou linguagens de programação.")
+              return None
+      except Exception as e:
+          st.error(f"Ocorreu um erro: {e}")
+          return None
 
-        ### 2. Google Revela Avanços em IA
-        O Google revelou avanços impressionantes em inteligência artificial, incluindo um novo algoritmo de aprendizado de máquina capaz de superar desafios complexos de jogos de tabuleiro. Os pesquisadores do Google afirmam que o novo algoritmo demonstra uma capacidade sem precedentes de aprendizado e adaptação.
+  # Define o título do aplicativo
+  st.title("Notícias sobre Inteligência Artificial e Linguagens de Programação")
 
-        ### 3. Amazon Lança Novo Dispositivo de Casa Inteligente
-        A Amazon lançou um novo dispositivo de casa inteligente chamado Echo Hub, projetado para ser o centro de controle para dispositivos domésticos conectados. O Echo Hub oferece recursos avançados de voz e integração perfeita com outros dispositivos compatíveis com Alexa.
+  # Obtém as notícias sobre inteligência artificial e linguagens de programação da API
+  ai_news = get_ai_news()
 
-        ### 4. Microsoft Anuncia Parceria com Empresa de Robótica
-        A Microsoft anunciou uma parceria estratégica com uma empresa líder em robótica para desenvolver soluções inovadoras para automação industrial e logística. A parceria visa combinar a expertise em software da Microsoft com a experiência em hardware da empresa de robótica para criar soluções de ponta.
-
-        ### 5. Facebook Lança Novo Recurso de Realidade Aumentada
-        O Facebook lançou um novo recurso de realidade aumentada chamado AR Studio, que permite aos usuários criar e compartilhar experiências imersivas de RA diretamente do aplicativo. O AR Studio oferece uma ampla gama de ferramentas e recursos para criar experiências interativas e envolventes.
-        """)
-
-    elif page == 'Detalhes':
-        st.markdown("""
-        ## Detalhes
-
-        Aqui estão alguns detalhes adicionais sobre as notícias:
-
-        ### Novo iPhone 14
-        A Apple anunciou várias novas características interessantes para o iPhone 14, incluindo uma nova tela OLED de alta resolução e uma câmera aprimorada com capacidades de fotografia computacional.
-
-        ### Avanços em IA
-        Os avanços em inteligência artificial revelados pelo Google têm o potencial de impactar uma ampla gama de indústrias, desde jogos até medicina e logística.
-
-        ### Novo Dispositivo de Casa Inteligente da Amazon
-        O Echo Hub da Amazon promete tornar a automação residencial mais acessível e conveniente para os usuários, oferecendo uma maneira fácil de controlar dispositivos domésticos inteligentes por meio de comandos de voz.
-
-        ### Parceria da Microsoft com Empresa de Robótica
-        A parceria estratégica entre a Microsoft e uma empresa de robótica sugere uma crescente ênfase na automação e na integração entre software e hardware para impulsionar a eficiência industrial.
-
-        ### Recurso de Realidade Aumentada do Facebook
-        O AR Studio do Facebook tem o potencial de transformar a forma como as pessoas interagem com a mídia social, permitindo a criação e o compartilhamento de experiências imersivas de realidade aumentada diretamente do aplicativo.
-        """)
-
+  # Se houver notícias disponíveis, exibe cada uma delas
+  if ai_news:
+      for idx, article in enumerate(ai_news, start=1):
+          st.subheader(f"Notícia {idx}")
+          st.write(article["title"])
+          st.write(article["description"])
+          if article["urlToImage"]:
+              st.image(article["urlToImage"], caption="Imagem da Notícia")
+          st.write("Fonte:", article["source"]["name"])
+          st.write("Autor:", article.get("author", "N/A"))
+          st.write("Publicado em:", article["publishedAt"])
+          st.write("Leia mais:", article["url"])
+          st.write("---")  # Adiciona uma linha horizontal entre cada notícia
 
 #TODO Page - Hacker Prevention
 # ------------------------------------------------------------------------------
