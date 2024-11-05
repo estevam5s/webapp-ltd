@@ -11,3 +11,4 @@ reportlab
 joblib
 google-generativeai
 qrcode
+langchain-community

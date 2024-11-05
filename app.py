@@ -5,7 +5,7 @@ import qrcode
 from io import BytesIO
 import streamlit as st
 from streamlit_chat import message
-# from langchain.chat_models import ChatOpenAI
+from langchain.chat_models import ChatOpenAI
 from openpyxl import load_workbook  # Importe a função load_workbook aqui
 from itertools import zip_longest
 from langchain.schema import (
@@ -26,138 +26,138 @@ import streamlit as st
 import google.generativeai as genai
 from dotenv import load_dotenv
 
-# def chatbotGemeni():
-#     load_dotenv()
-#     GOOGLE_API_KEY=os.environ.get('GOOGLE_API_KEY')
-#     genai.configure(api_key=GOOGLE_API_KEY)
+def chatbotGemeni():
+    load_dotenv()
+    GOOGLE_API_KEY=os.environ.get('GOOGLE_API_KEY')
+    genai.configure(api_key=GOOGLE_API_KEY)
 
-#     new_chat_id = f'{time.time()}'
-#     MODEL_ROLE = 'ai'
-#     AI_AVATAR_ICON = '✨'
+    new_chat_id = f'{time.time()}'
+    MODEL_ROLE = 'ai'
+    AI_AVATAR_ICON = '✨'
 
-#     # Create a data/ folder if it doesn't already exist
-#     try:
-#         os.mkdir('data/')
-#     except:
-#         # data/ folder already exists
-#         pass
+    # Create a data/ folder if it doesn't already exist
+    try:
+        os.mkdir('data/')
+    except:
+        # data/ folder already exists
+        pass
 
-#     # Load past chats (if available)
-#     try:
-#         past_chats: dict = joblib.load('data/past_chats_list')
-#     except:
-#         past_chats = {}
+    # Load past chats (if available)
+    try:
+        past_chats: dict = joblib.load('data/past_chats_list')
+    except:
+        past_chats = {}
 
-#     # Sidebar allows a list of past chats
-#     with st.sidebar:
-#         st.write('# Past Chats')
-#         if st.session_state.get('chat_id') is None:
-#             st.session_state.chat_id = st.selectbox(
-#                 label='Pick a past chat',
-#                 options=[new_chat_id] + list(past_chats.keys()),
-#                 format_func=lambda x: past_chats.get(x, 'New Chat'),
-#                 placeholder='_',
-#             )
-#         else:
-#             # This will happen the first time AI response comes in
-#             st.session_state.chat_id = st.selectbox(
-#                 label='Pick a past chat',
-#                 options=[new_chat_id, st.session_state.chat_id] + list(past_chats.keys()),
-#                 index=1,
-#                 format_func=lambda x: past_chats.get(x, 'New Chat' if x != st.session_state.chat_id else st.session_state.chat_title),
-#                 placeholder='_',
-#             )
-#         # Save new chats after a message has been sent to AI
-#         # TODO: Give user a chance to name chat
-#         st.session_state.chat_title = f'ChatSession-{st.session_state.chat_id}'
+    # Sidebar allows a list of past chats
+    with st.sidebar:
+        st.write('# Past Chats')
+        if st.session_state.get('chat_id') is None:
+            st.session_state.chat_id = st.selectbox(
+                label='Pick a past chat',
+                options=[new_chat_id] + list(past_chats.keys()),
+                format_func=lambda x: past_chats.get(x, 'New Chat'),
+                placeholder='_',
+            )
+        else:
+            # This will happen the first time AI response comes in
+            st.session_state.chat_id = st.selectbox(
+                label='Pick a past chat',
+                options=[new_chat_id, st.session_state.chat_id] + list(past_chats.keys()),
+                index=1,
+                format_func=lambda x: past_chats.get(x, 'New Chat' if x != st.session_state.chat_id else st.session_state.chat_title),
+                placeholder='_',
+            )
+        # Save new chats after a message has been sent to AI
+        # TODO: Give user a chance to name chat
+        st.session_state.chat_title = f'ChatSession-{st.session_state.chat_id}'
 
-#     st.write('# Chat with Gemini')
+    st.write('# Chat with Gemini')
 
-#     # Chat history (allows to ask multiple questions)
-#     try:
-#         st.session_state.messages = joblib.load(
-#             f'data/{st.session_state.chat_id}-st_messages'
-#         )
-#         st.session_state.gemini_history = joblib.load(
-#             f'data/{st.session_state.chat_id}-gemini_messages'
-#         )
-#         print('old cache')
-#     except:
-#         st.session_state.messages = []
-#         st.session_state.gemini_history = []
-#         print('new_cache made')
-#     st.session_state.model = genai.GenerativeModel('gemini-pro')
-#     st.session_state.chat = st.session_state.model.start_chat(
-#         history=st.session_state.gemini_history,
-#     )
+    # Chat history (allows to ask multiple questions)
+    try:
+        st.session_state.messages = joblib.load(
+            f'data/{st.session_state.chat_id}-st_messages'
+        )
+        st.session_state.gemini_history = joblib.load(
+            f'data/{st.session_state.chat_id}-gemini_messages'
+        )
+        print('old cache')
+    except:
+        st.session_state.messages = []
+        st.session_state.gemini_history = []
+        print('new_cache made')
+    st.session_state.model = genai.GenerativeModel('gemini-pro')
+    st.session_state.chat = st.session_state.model.start_chat(
+        history=st.session_state.gemini_history,
+    )
 
-#     # Display chat messages from history on app rerun
-#     for message in st.session_state.messages:
-#         with st.chat_message(
-#             name=message['role'],
-#             avatar=message.get('avatar'),
-#         ):
-#             st.markdown(message['content'])
+    # Display chat messages from history on app rerun
+    for message in st.session_state.messages:
+        with st.chat_message(
+            name=message['role'],
+            avatar=message.get('avatar'),
+        ):
+            st.markdown(message['content'])
 
-#     # React to user input
-#     if prompt := st.chat_input('Your message here...'):
-#         # Save this as a chat for later
-#         if st.session_state.chat_id not in past_chats.keys():
-#             past_chats[st.session_state.chat_id] = st.session_state.chat_title
-#             joblib.dump(past_chats, 'data/past_chats_list')
-#         # Display user message in chat message container
-#         with st.chat_message('user'):
-#             st.markdown(prompt)
-#         # Add user message to chat history
-#         st.session_state.messages.append(
-#             dict(
-#                 role='user',
-#                 content=prompt,
-#             )
-#         )
-#         ## Send message to AI
-#         response = st.session_state.chat.send_message(
-#             prompt,
-#             stream=True,
-#         )
-#         # Display assistant response in chat message container
-#         with st.chat_message(
-#             name=MODEL_ROLE,
-#             avatar=AI_AVATAR_ICON,
-#         ):
-#             message_placeholder = st.empty()
-#             full_response = ''
-#             assistant_response = response
-#             # Streams in a chunk at a time
-#             for chunk in response:
-#                 # Simulate stream of chunk
-#                 # TODO: Chunk missing `text` if API stops mid-stream ("safety"?)
-#                 for ch in chunk.text.split(' '):
-#                     full_response += ch + ' '
-#                     time.sleep(0.05)
-#                     # Rewrites with a cursor at end
-#                     message_placeholder.write(full_response + '▌')
-#             # Write full message with placeholder
-#             message_placeholder.write(full_response)
+    # React to user input
+    if prompt := st.chat_input('Your message here...'):
+        # Save this as a chat for later
+        if st.session_state.chat_id not in past_chats.keys():
+            past_chats[st.session_state.chat_id] = st.session_state.chat_title
+            joblib.dump(past_chats, 'data/past_chats_list')
+        # Display user message in chat message container
+        with st.chat_message('user'):
+            st.markdown(prompt)
+        # Add user message to chat history
+        st.session_state.messages.append(
+            dict(
+                role='user',
+                content=prompt,
+            )
+        )
+        ## Send message to AI
+        response = st.session_state.chat.send_message(
+            prompt,
+            stream=True,
+        )
+        # Display assistant response in chat message container
+        with st.chat_message(
+            name=MODEL_ROLE,
+            avatar=AI_AVATAR_ICON,
+        ):
+            message_placeholder = st.empty()
+            full_response = ''
+            assistant_response = response
+            # Streams in a chunk at a time
+            for chunk in response:
+                # Simulate stream of chunk
+                # TODO: Chunk missing `text` if API stops mid-stream ("safety"?)
+                for ch in chunk.text.split(' '):
+                    full_response += ch + ' '
+                    time.sleep(0.05)
+                    # Rewrites with a cursor at end
+                    message_placeholder.write(full_response + '▌')
+            # Write full message with placeholder
+            message_placeholder.write(full_response)
 
-#         # Add assistant response to chat history
-#         st.session_state.messages.append(
-#             dict(
-#                 role=MODEL_ROLE,
-#                 content=st.session_state.chat.history[-1].parts[0].text,
-#                 avatar=AI_AVATAR_ICON,
-#             )
-#         )
-#         st.session_state.gemini_history = st.session_state.chat.history
-#         # Save to file
-#         joblib.dump(
-#             st.session_state.messages,
-#             f'data/{st.session_state.chat_id}-st_messages',
-#         )
-#         joblib.dump(
-#             st.session_state.gemini_history,
-#             f'data/{st.session_state.chat_id}-gemini_messages',
-        # )
+        # Add assistant response to chat history
+        st.session_state.messages.append(
+            dict(
+                role=MODEL_ROLE,
+                content=st.session_state.chat.history[-1].parts[0].text,
+                avatar=AI_AVATAR_ICON,
+            )
+        )
+        st.session_state.gemini_history = st.session_state.chat.history
+        # Save to file
+        joblib.dump(
+            st.session_state.messages,
+            f'data/{st.session_state.chat_id}-st_messages',
+        )
+        joblib.dump(
+            st.session_state.gemini_history,
+            f'data/{st.session_state.chat_id}-gemini_messages',
+        )
 
 # Load environment variables
 load_dotenv()
@@ -166,120 +166,120 @@ st.set_page_config(page_title="Sales Dashboard", page_icon=":bar_chart:", layout
 #TODO Page - chatbot
 # ------------------------------------------------------------------------------
 # Initialize session state variables for chatbot
-# def init_chatbot_session_state():
-#     if 'generated' not in st.session_state:
-#         st.session_state['generated'] = []  # Store AI generated responses
+def init_chatbot_session_state():
+    if 'generated' not in st.session_state:
+        st.session_state['generated'] = []  # Store AI generated responses
 
-#     if 'past' not in st.session_state:
-#         st.session_state['past'] = []  # Store past user inputs
+    if 'past' not in st.session_state:
+        st.session_state['past'] = []  # Store past user inputs
 
-#     if 'entered_prompt' not in st.session_state:
-#         st.session_state['entered_prompt'] = ""  # Store the latest user input
+    if 'entered_prompt' not in st.session_state:
+        st.session_state['entered_prompt'] = ""  # Store the latest user input
 
-# # Initialize session state variables for resume generator
-# def init_resume_session_state():
-#     if 'name' not in st.session_state:
-#         st.session_state['name'] = ""
-#     if 'email' not in st.session_state:
-#         st.session_state['email'] = ""
-#     if 'phone' not in st.session_state:
-#         st.session_state['phone'] = ""
-#     if 'experience' not in st.session_state:
-#         st.session_state['experience'] = ""
-#     if 'education' not in st.session_state:
-#         st.session_state['education'] = ""
-#     if 'skills' not in st.session_state:
-#         st.session_state['skills'] = ""
+# Initialize session state variables for resume generator
+def init_resume_session_state():
+    if 'name' not in st.session_state:
+        st.session_state['name'] = ""
+    if 'email' not in st.session_state:
+        st.session_state['email'] = ""
+    if 'phone' not in st.session_state:
+        st.session_state['phone'] = ""
+    if 'experience' not in st.session_state:
+        st.session_state['experience'] = ""
+    if 'education' not in st.session_state:
+        st.session_state['education'] = ""
+    if 'skills' not in st.session_state:
+        st.session_state['skills'] = ""
 
 # Initialize the ChatOpenAI model
-# def init_chatbot_model(api_key):
-#     return ChatOpenAI(
-#         temperature=0.5,
-#         model_name="gpt-3.5-turbo",
-#         api_key="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"
-#     )
+def init_chatbot_model(api_key):
+    return ChatOpenAI(
+        temperature=0.5,
+        model_name="gpt-3.5-turbo",
+        api_key="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"
+    )
 
 # Build a list of messages including system, human and AI messages for chatbot
-# def build_message_list():
-#     zipped_messages = [SystemMessage(
-#         content="You are a helpful AI assistant talking with a human. If you do not know an answer, just say 'I don't know', do not make up an answer.")]
+def build_message_list():
+    zipped_messages = [SystemMessage(
+        content="You are a helpful AI assistant talking with a human. If you do not know an answer, just say 'I don't know', do not make up an answer.")]
 
-#     for human_msg, ai_msg in zip_longest(st.session_state['past'], st.session_state['generated']):
-#         if human_msg is not None:
-#             zipped_messages.append(HumanMessage(
-#                 content=human_msg))  
-#         if ai_msg is not None:
-#             zipped_messages.append(
-#                 AIMessage(content=ai_msg))  
+    for human_msg, ai_msg in zip_longest(st.session_state['past'], st.session_state['generated']):
+        if human_msg is not None:
+            zipped_messages.append(HumanMessage(
+                content=human_msg))  
+        if ai_msg is not None:
+            zipped_messages.append(
+                AIMessage(content=ai_msg))  
 
-#     return zipped_messages
+    return zipped_messages
 
-# # Generate AI response using the ChatOpenAI model
-# def generate_response(chat):
-#     zipped_messages = build_message_list()
-#     ai_response = chat(zipped_messages)
-#     return ai_response.content
+# Generate AI response using the ChatOpenAI model
+def generate_response(chat):
+    zipped_messages = build_message_list()
+    ai_response = chat(zipped_messages)
+    return ai_response.content
 
-# # Initialize the ChatOpenAI model
-# def init_chat():
-#     return ChatOpenAI(
-#         temperature=0.5,
-#         model_name="gpt-3.5-turbo"
-#     )
+# Initialize the ChatOpenAI model
+def init_chat():
+    return ChatOpenAI(
+        temperature=0.5,
+        model_name="gpt-3.5-turbo"
+    )
 
-# # Initialize session state variables
-# def init_session_state():
-#     if 'generated' not in st.session_state:
-#         st.session_state['generated'] = []  # Store AI generated responses
+# Initialize session state variables
+def init_session_state():
+    if 'generated' not in st.session_state:
+        st.session_state['generated'] = []  # Store AI generated responses
 
-#     if 'past' not in st.session_state:
-#         st.session_state['past'] = []  # Store past user inputs
+    if 'past' not in st.session_state:
+        st.session_state['past'] = []  # Store past user inputs
 
-#     if 'entered_prompt' not in st.session_state:
-#         st.session_state['entered_prompt'] = ""  # Store the latest user input
+    if 'entered_prompt' not in st.session_state:
+        st.session_state['entered_prompt'] = ""  # Store the latest user input
 
 
 # Function for the chatbot page
-# def chatbot_page():
-#     st.title("ChatBot LTD")
+def chatbot_page():
+    st.title("ChatBot LTD")
 
-#     # Initialize session state variables
-#     init_session_state()
+    # Initialize session state variables
+    init_session_state()
 
-#     # Initialize the ChatOpenAI model
-#     chat = init_chat()
+    # Initialize the ChatOpenAI model
+    chat = init_chat()
 
-#     # Create a text input for user
-#     user_input = st.text_input('YOU: ', key='prompt_input')
+    # Create a text input for user
+    user_input = st.text_input('YOU: ', key='prompt_input')
 
-#     if st.button("Enviar"):
-#         st.session_state.entered_prompt = user_input
+    if st.button("Enviar"):
+        st.session_state.entered_prompt = user_input
 
-#     if st.session_state.entered_prompt != "":
-#         # Get user query
-#         user_query = st.session_state.entered_prompt
+    if st.session_state.entered_prompt != "":
+        # Get user query
+        user_query = st.session_state.entered_prompt
 
-#         # Append user query to past queries
-#         st.session_state.past.append(user_query)
+        # Append user query to past queries
+        st.session_state.past.append(user_query)
 
-#         # Generate response
-#         output = generate_response(chat)
+        # Generate response
+        output = generate_response(chat)
 
-#         # Append AI response to generated responses
-#         st.session_state.generated.append(output)
+        # Append AI response to generated responses
+        st.session_state.generated.append(output)
 
-#     # Display the chat history
-#     if st.session_state['generated']:
-#         for i in range(len(st.session_state['generated'])-1, -1, -1):
-#             # Display AI response
-#             message(st.session_state["generated"][i], key=str(i))
-#             # Display user message
-#             message(st.session_state['past'][i],
-#                     is_user=True, key=str(i) + '_user')
+    # Display the chat history
+    if st.session_state['generated']:
+        for i in range(len(st.session_state['generated'])-1, -1, -1):
+            # Display AI response
+            message(st.session_state["generated"][i], key=str(i))
+            # Display user message
+            message(st.session_state['past'][i],
+                    is_user=True, key=str(i) + '_user')
 
-#     st.markdown("""
-#     ---
-#     Feito por [Estevam Souza](https://github.com/estevam5s)""")
+    st.markdown("""
+    ---
+    Feito por [Estevam Souza](https://github.com/estevam5s)""")
 
 #TODO Page - About
 # ------------------------------------------------------------------------------
@@ -530,8 +530,7 @@ def whatsapp_ai_bot_help_page():
     page = st.sidebar.radio("Selecione uma página", ["Chatbot com Interface Whatsapp Web", "Chatbot com Interface IA", "Sobre a Automação com WhatsApp", "Utilizando IA para Respostas", "Usando o Typebot"])
 
     if page == "Chatbot com Interface IA":
-        # chatbotGemeni()
-        pass
+        chatbotGemeni()
 
     if page == "Sobre a Automação com WhatsApp":
         st.title("Sobre a Automação com WhatsApp")
