@@ -5,7 +5,7 @@ import qrcode
 from io import BytesIO
 import streamlit as st
 from streamlit_chat import message
-# from langchain.chat_models import ChatOpenAI
+from langchain.chat_models import ChatOpenAI
 from openpyxl import load_workbook  # Importe a função load_workbook aqui
 from itertools import zip_longest
 from langchain.schema import (
@@ -192,12 +192,12 @@ def init_resume_session_state():
         st.session_state['skills'] = ""
 
 # Initialize the ChatOpenAI model
-# def init_chatbot_model(api_key):
-#     return ChatOpenAI(
-#         temperature=0.5,
-#         model_name="gpt-3.5-turbo",
-#         api_key="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"
-#     )
+def init_chatbot_model(api_key):
+    return ChatOpenAI(
+        temperature=0.5,
+        model_name="gpt-3.5-turbo",
+        api_key="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"
+    )
 
 # Build a list of messages including system, human and AI messages for chatbot
 def build_message_list():
@@ -215,17 +215,17 @@ def build_message_list():
     return zipped_messages
 
 # Generate AI response using the ChatOpenAI model
-# def generate_response(chat):
-#     zipped_messages = build_message_list()
-#     ai_response = chat(zipped_messages)
-#     return ai_response.content
+def generate_response(chat):
+    zipped_messages = build_message_list()
+    ai_response = chat(zipped_messages)
+    return ai_response.content
 
 # Initialize the ChatOpenAI model
-# def init_chat():
-#     return ChatOpenAI(
-#         temperature=0.5,
-#         model_name="gpt-3.5-turbo"
-#     )
+def init_chat():
+    return ChatOpenAI(
+        temperature=0.5,
+        model_name="gpt-3.5-turbo"
+    )
 
 # Initialize session state variables
 def init_session_state():
@@ -240,46 +240,46 @@ def init_session_state():
 
 
 # Function for the chatbot page
-# def chatbot_page():
-#     st.title("ChatBot LTD")
+def chatbot_page():
+    st.title("ChatBot LTD")
 
-#     # Initialize session state variables
-#     init_session_state()
+    # Initialize session state variables
+    init_session_state()
 
-#     # Initialize the ChatOpenAI model
-#     chat = init_chat()
+    # Initialize the ChatOpenAI model
+    chat = init_chat()
 
-#     # Create a text input for user
-#     user_input = st.text_input('YOU: ', key='prompt_input')
+    # Create a text input for user
+    user_input = st.text_input('YOU: ', key='prompt_input')
 
-#     if st.button("Enviar"):
-#         st.session_state.entered_prompt = user_input
+    if st.button("Enviar"):
+        st.session_state.entered_prompt = user_input
 
-#     if st.session_state.entered_prompt != "":
-#         # Get user query
-#         user_query = st.session_state.entered_prompt
+    if st.session_state.entered_prompt != "":
+        # Get user query
+        user_query = st.session_state.entered_prompt
 
-#         # Append user query to past queries
-#         st.session_state.past.append(user_query)
+        # Append user query to past queries
+        st.session_state.past.append(user_query)
 
-#         # Generate response
-#         output = generate_response(chat)
+        # Generate response
+        output = generate_response(chat)
 
-#         # Append AI response to generated responses
-#         st.session_state.generated.append(output)
+        # Append AI response to generated responses
+        st.session_state.generated.append(output)
 
-#     # Display the chat history
-#     if st.session_state['generated']:
-#         for i in range(len(st.session_state['generated'])-1, -1, -1):
-#             # Display AI response
-#             message(st.session_state["generated"][i], key=str(i))
-#             # Display user message
-#             message(st.session_state['past'][i],
-#                     is_user=True, key=str(i) + '_user')
+    # Display the chat history
+    if st.session_state['generated']:
+        for i in range(len(st.session_state['generated'])-1, -1, -1):
+            # Display AI response
+            message(st.session_state["generated"][i], key=str(i))
+            # Display user message
+            message(st.session_state['past'][i],
+                    is_user=True, key=str(i) + '_user')
 
-#     st.markdown("""
-#     ---
-#     Feito por [Estevam Souza](https://github.com/estevam5s)""")
+    st.markdown("""
+    ---
+    Feito por [Estevam Souza](https://github.com/estevam5s)""")
 
 #TODO Page - About
 # ------------------------------------------------------------------------------
